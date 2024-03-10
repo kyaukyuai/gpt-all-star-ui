@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "gpt-all-star-ui"
+version = "0.0.1"
+description = ""
+authors = ["kyaukyuai <y.kakui@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+streamlit = "^1.31.1"
+gpt-all-star = "^0.0.7"
+streamlit-extras = "^0.4.0"
+streamlit-option-menu = "^0.3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.2"
+black = "^24.2.0"
+flake8 = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

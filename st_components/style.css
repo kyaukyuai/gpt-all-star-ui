@@ -1,0 +1,72 @@
+/* Button styles */
+.stButton>button,
+.stDownloadButton>button {
+  width: 100%;
+}
+
+/* Font styles */
+h1,
+[data-testid="stMarkdownContainer"],
+[data-testid="stExpander"] {
+  font-family: ui-monospace;
+}
+
+/* Primary button styles */
+button[data-testid="baseButton-primary"] {
+  border-color: #505050;
+  background-color: #1E1E1E;
+}
+
+button[data-testid="baseButton-primary"]:hover {
+  border-color: #FC625F;
+  background-color: #1E1E1E;
+  color: #FC625F;
+}
+
+/* Sidebar styles */
+[data-testid="stSidebar"][aria-expanded="true"] {
+  min-width: 400px;
+  max-width: 400px;
+}
+
+/* Markdown styles */
+[data-testid="stMarkdown"] {
+  font-size: 12px;
+}
+
+[data-testid="stMarkdown"] h1 {
+  font-size: 14px;
+}
+
+/* Select box styles */
+.stSelectbox>div[data-baseweb="select"]>div {
+  padding: 4px;
+  font-size: 14px;
+}
+
+/* Input container styles */
+#input-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  z-index: 100;
+}
+
+/* Avatar styles */
+.user-avatar,
+.bot-avatar {
+  float: right;
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  margin-bottom: -10px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.bot-avatar {
+  float: left;
+  margin-right: 15px;
+}
