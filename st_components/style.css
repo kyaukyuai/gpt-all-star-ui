@@ -25,8 +25,8 @@ button[data-testid="baseButton-primary"]:hover {
 
 /* Sidebar styles */
 [data-testid="stSidebar"][aria-expanded="true"] {
-  min-width: 400px;
-  max-width: 400px;
+  min-width: 260px;
+  max-width: 260px;
 }
 
 /* Markdown styles */
@@ -58,9 +58,8 @@ button[data-testid="baseButton-primary"]:hover {
 .user-avatar,
 .bot-avatar {
   float: right;
-  width: 40px;
-  height: 40px;
-  margin-left: 5px;
+  width: 50px;
+  height: 50px;
   margin-bottom: -10px;
   border-radius: 50%;
   object-fit: cover;
@@ -68,5 +67,4 @@ button[data-testid="baseButton-primary"]:hover {
 
 .bot-avatar {
   float: left;
-  margin-right: 15px;
 }

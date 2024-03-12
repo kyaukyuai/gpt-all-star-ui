@@ -1,4 +1,5 @@
 import html
+import json
 import re
 
 import streamlit as st
@@ -21,59 +22,76 @@ def format_message(text):
     return formatted_text
 
 
-def display_message(text, is_user=False, is_df=False):
-    if is_user:
-        avatar_url = "app/static/user.png"
-        message_alignment = "flex-end"
-        message_bg_color = "linear-gradient(135deg, #00B2FF 0%, #006AFF 100%)"
-        avatar_class = "user-avatar"
-        st.write(
-            f"""
-                <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: {message_alignment};">
-                    <div style="background: {message_bg_color}; color: white; border-radius: 20px; padding: 10px; margin-right: 5px; max-width: 75%; font-size: 14px; font-family: ui-monospace;">
+def display_user_message(text):
+    avatar_url = "app/static/user.png"
+    message_alignment = "flex-end"
+    message_bg_color = "linear-gradient(135deg, #00B2FF 0%, #006AFF 100%)"
+    avatar_class = "user-avatar"
+    st.write(
+        f"""
+                <div style="display: flex; align-items: center; justify-content: {message_alignment};">
+                    <div style="background: {message_bg_color}; color: white; border-radius: 20px; padding: 10px; margin-right: 5px; max-width: 75%; font-size: 12px; font-family: ui-monospace;">
                         {text} \n </div>
-                    <img src="{avatar_url}" class="{avatar_class}" alt="avatar" style="width: 50px; height: 50px;" />
+                    <div style="display: flex; align-items: center; flex-flow: column; height: 100px; justify-content: space-around;">
+                        <img src="{avatar_url}" class="{avatar_class}" alt="avatar"/>
+                        <p style="font-size: 12px; font-family: ui-monospace;">You</p>
+                    </div>
                 </div>
             """,
-            unsafe_allow_html=True,
-        )
+        unsafe_allow_html=True,
+    )
+
+
+def display_agent_message(name, text):
+    # Load agents.json to find the matching avatar for the given name
+    with open("agents.json", "r") as file:
+        agents = json.load(file)
+    agent_info = next((agent for agent in agents if agent["name"] == name), None)
+    if agent_info and "avatar" in agent_info and "color" in agent_info:
+        avatar_url = agent_info["avatar"]
+        message_bg_color = agent_info["color"]
     else:
         avatar_url = "app/static/user.png"
-        message_alignment = "flex-start"
         message_bg_color = "#71797E"
-        avatar_class = "bot-avatar"
 
-        if is_df:
-            st.write(
-                f"""
-                    <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: {message_alignment};">
-                        <img src="https://pbs.twimg.com/profile_images/1274363897676521474/qgbqYYuV_400x400.jpg" class="{avatar_class}" alt="avatar" style="width: 50px; height: 50px;" />
+    message_alignment = "flex-start"
+    avatar_class = "bot-avatar"
+    text = format_message(text)
+    st.write(
+        f"""
+                <div style="display: flex; align-items: center; justify-content: {message_alignment};">
+                    <div style="display: flex; align-items: center; flex-flow: column; height: 100px; justify-content: space-around; margin-right: 10px;">
+                        <img src="{avatar_url}" class="{avatar_class}" alt="avatar" />
+                        <p style="font-size: 12px; font-family: ui-monospace;">{name}</p>
                     </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            st.write(text)
-            return
-        else:
-            text = format_message(text)
-
-        st.write(
-            f"""
-                <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: {message_alignment};">
-                    <img src="{avatar_url}" class="{avatar_class}" alt="avatar" style="width: 50px; height: 50px;" />
-                    <div style="background: {message_bg_color}; color: white; border-radius: 20px; padding: 10px; margin-right: 5px; max-width: 75%; font-size: 14px; font-family: ui-monospace;">
+                    <div style="background: {message_bg_color}; color: white; border-radius: 20px; padding: 10px; margin-right: 5px; max-width: 75%; font-size: 12px; font-family: ui-monospace;">
                         {text} \n </div>
                 </div>
             """,
-            unsafe_allow_html=True,
-        )
+        unsafe_allow_html=True,
+    )
+
+
+def display_copilot_message(text):
+    avatar_url = "app/static/robot.png"
+    message_alignment = "flex-start"
+    message_bg_color = "#71797E"
+    avatar_class = "bot-avatar"
+    text = format_message(text)
+    st.write(
+        f"""
+                <div style="display: flex; align-items: center; justify-content: {message_alignment};">
+                    <div style="display: flex; align-items: center; flex-flow: column; height: 100px; justify-content: space-around; margin-right: 10px;">
+                        <img src="{avatar_url}" class="{avatar_class}" alt="avatar" />
+                        <p style="font-size: 12px; font-family: ui-monospace;">Copilot</p>
+                    </div>
+                    <div style="background: {message_bg_color}; color: white; border-radius: 20px; padding: 10px; margin-right: 5px; max-width: 75%; font-size: 12px; font-family: ui-monospace;">
+                        {text} \n </div>
+                </div>
+            """,
+        unsafe_allow_html=True,
+    )
 
 
 def _append_chat_history(question, answer):
     st.session_state.history.append((question, answer))
-
-
-def append_message(content, role="assistant"):
-    st.session_state.messages.append({"role": role, "content": content})
-    if role != "data":
-        _append_chat_history(st.session_state.messages[-2]["content"], content)

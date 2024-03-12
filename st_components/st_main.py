@@ -2,7 +2,11 @@ import streamlit as st
 from gpt_all_star.core.steps.steps import StepType
 from langchain_core.messages import HumanMessage
 
-from st_components.st_message import display_message
+from st_components.st_message import (
+    display_agent_message,
+    display_copilot_message,
+    display_user_message,
+)
 
 
 def st_main():
@@ -14,27 +18,31 @@ def st_main():
             st.session_state.messages.append({"role": "user", "content": prompt})
 
         for message in st.session_state.messages:
-            is_user = message["role"] == "user"
-            is_data = message["role"] == "data"
-            display_message(message["content"], is_user, is_data)
+            if message["role"] == "user":
+                display_user_message(message["content"])
+            elif message["role"] == "copilot":
+                display_copilot_message(message["content"])
 
         if prompt:
             for chunk in st.session_state.gpt_all_star.chat(
                 message=prompt, step=StepType.SPECIFICATION, project_name="test"
             ):
-                st.write(chunk)
-                if chunk.get("next"):
-                    st.write(chunk.get("next"))
-                    with st.spinner(f"{chunk.get('next')} is typing ..."):
-                        pass
+                # st.write(chunk)
+                # if chunk.get("next"):
+                #     st.write(chunk.get("next"))
+                #     with st.spinner(f"{chunk.get('next')} is typing ..."):
+                #         pass
 
                 if chunk.get("messages"):
                     for message in chunk.get("messages"):
                         if isinstance(message, HumanMessage):
-                            st.session_state.messages.append(
-                                {"role": "assistant", "content": message.content}
-                            )
-                            display_message(message.content, False, False)
+                            if message.name is not None:
+                                st.session_state.messages.append(
+                                    {"role": "assistant", "content": message.content}
+                                )
+                                display_agent_message(message.name, message.content)
+                            else:
+                                display_copilot_message(message.content)
 
             display_markdown_file("projects/test/specifications.md")
 

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Steve Jobs",
+    "avatar": "app/static/user1.png",
+    "color": "#FBE7C6"
+  },
+  {
+    "name": "DHH",
+    "avatar": "app/static/user2.png",
+    "color": "#B4F8C8"
+  },
+  {
+    "name": "Jeff Dean",
+    "avatar": "app/static/user3.png",
+    "color": "#A0E7E5"
+  },
+  {
+    "name": "Jonathan Ive",
+    "avatar": "app/static/user4.png",
+    "color": "#FFAEBC"
+  },
+  {
+    "name": "Sam Altman",
+    "avatar": "app/static/user5.png",
+    "color": "#65463E"
+  },
+  {
+    "name": "Elon Musk",
+    "avatar": "app/static/user6.png",
+    "color": "#DCBAA9"
+  }
+]

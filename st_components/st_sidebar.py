@@ -9,7 +9,7 @@ AZURE_OPEN_AI = "Azure OpenAI"
 def st_sidebar():
     with st.sidebar:
         api_server = st.selectbox(
-            "Your API Server",
+            "API Server",
             [OPEN_AI, AZURE_OPEN_AI],
         )
 
@@ -30,7 +30,7 @@ def set_open_ai_credentials():
         )
         model = st.selectbox(label="🔌 models", options=model_options, index=0)
 
-        if st.button("Save Changes 🚀", key="open_ai_save_model_configs") and openai_key:
+        if st.button("Save", key="open_ai_save_model_configs") and openai_key:
             update_open_ai_environment(openai_key, model)
             st.session_state["chat_ready"] = True
             st.rerun()
