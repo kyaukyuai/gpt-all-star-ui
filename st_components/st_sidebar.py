@@ -24,7 +24,9 @@ def set_open_ai_credentials():
         label="Settings", expanded=(not st.session_state.get("chat_ready", False))
     )
     with expander:
-        openai_key = st.text_input("OpenAI Key:", type="password")
+        openai_key = st.text_input(
+            "OpenAI Key:", type="password", value=st.secrets["OPENAI_API_KEY"]
+        )
         model_options = list(
             st.session_state.get("models", {}).get("openai", {}).keys()
         )
@@ -47,17 +49,23 @@ def set_azure_open_ai_credentials():
         label="Settings", expanded=(not st.session_state.get("chat_ready", False))
     )
     with expander:
-        azure_openai_key = st.text_input("Azure OpenAI Key:", type="password")
+        azure_openai_key = st.text_input(
+            "Azure OpenAI Key:",
+            type="password",
+            value=st.secrets["AZURE_OPENAI_API_KEY"],
+        )
         azure_endpoint = st.text_input(
             "Azure endpoint",
             placeholder="https://{your-resource-name}.openai.azure.com",
+            value=st.secrets["AZURE_OPENAI_ENDPOINT"],
         )
         deployment_id = st.text_input(
             "Deployment ID",
             help="The deployment name you chose when you deployed the model.",
+            value=st.secrets["AZURE_OPENAI_DEPLOYMENT_NAME"],
         )
         if (
-            st.button("Save Changes 🚀", key="azure_open_ai_save_model_configs")
+            st.button("Save", key="azure_open_ai_save_model_configs")
             and azure_openai_key
         ):
             update_azure_open_ai_environment(
