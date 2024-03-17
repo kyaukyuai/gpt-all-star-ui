@@ -13,37 +13,53 @@ def st_main():
     if not st.session_state["chat_ready"]:
         introduction()
     else:
-        prompt = st.chat_input()
-        if prompt:
-            st.session_state.messages.append({"role": "user", "content": prompt})
+        handle_chat_interaction()
 
-        for message in st.session_state.messages:
-            if message["role"] == "user":
-                display_user_message(message["content"])
-            elif message["role"] == "copilot":
-                display_copilot_message(message["content"])
 
-        if prompt:
-            for chunk in st.session_state.gpt_all_star.chat(
-                message=prompt,
-                step=StepType.SPECIFICATION,
-                project_name=st.session_state["project_name"],
-            ):
-                # st.write(chunk)
-                if chunk.get("messages"):
-                    for message in chunk.get("messages"):
-                        if isinstance(message, HumanMessage):
-                            if message.name is not None:
-                                st.session_state.messages.append(
-                                    {"role": "assistant", "content": message.content}
-                                )
-                                display_agent_message(message.name, message.content)
-                            else:
-                                display_copilot_message(message.content)
+def handle_chat_interaction():
+    prompt = st.chat_input()
+    if prompt:
+        st.session_state.messages.append({"role": "user", "content": prompt})
 
-            display_markdown_file(
-                f"projects/{st.session_state['project_name']}/specifications.md"
+    display_messages()
+
+    if prompt:
+        process_prompt(prompt, StepType.SPECIFICATION, "specifications.md")
+        process_prompt(prompt, StepType.SYSTEM_DESIGN, "technologies.md")
+
+
+def process_prompt(prompt, step_type, markdown_file):
+    for chunk in st.session_state.gpt_all_star.chat(
+        message=prompt,
+        step=step_type,
+        project_name=st.session_state["project_name"],
+    ):
+        if chunk.get("messages"):
+            for message in chunk.get("messages"):
+                process_message(message)
+
+    display_markdown_file(
+        f"projects/{st.session_state['project_name']}/docs/{markdown_file}"
+    )
+
+
+def process_message(message):
+    if isinstance(message, HumanMessage):
+        if message.name is not None:
+            st.session_state.messages.append(
+                {"role": "assistant", "content": message.content}
             )
+            display_agent_message(message.name, message.content)
+        else:
+            display_copilot_message(message.content)
+
+
+def display_messages():
+    for message in st.session_state.messages:
+        if message["role"] == "user":
+            display_user_message(message["content"])
+        elif message["role"] == "copilot":
+            display_copilot_message(message["content"])
 
 
 def load_markdown_file(path):
