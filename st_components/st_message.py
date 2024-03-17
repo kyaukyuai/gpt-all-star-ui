@@ -91,7 +91,3 @@ def display_copilot_message(text):
             """,
         unsafe_allow_html=True,
     )
-
-
-def _append_chat_history(question, answer):
-    st.session_state.history.append((question, answer))

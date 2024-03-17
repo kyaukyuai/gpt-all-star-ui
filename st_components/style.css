@@ -35,13 +35,13 @@ button[data-testid="baseButton-primary"]:hover {
 }
 
 [data-testid="stMarkdown"] h1 {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* Select box styles */
 .stSelectbox>div[data-baseweb="select"]>div {
   padding: 4px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* Input container styles */
