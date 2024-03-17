@@ -2,31 +2,31 @@
   {
     "name": "Steve Jobs",
     "avatar": "app/static/agent1.png",
-    "color": "#FBE7C6"
+    "color": "#71797E"
   },
   {
     "name": "DHH",
     "avatar": "app/static/agent2.png",
-    "color": "#B4F8C8"
+    "color": "#71797E"
   },
   {
     "name": "Jeff Dean",
     "avatar": "app/static/agent3.png",
-    "color": "#A0E7E5"
+    "color": "#71797E"
   },
   {
     "name": "Jonathan Ive",
     "avatar": "app/static/agent4.png",
-    "color": "#FFAEBC"
+    "color": "#71797E"
   },
   {
     "name": "Sam Altman",
     "avatar": "app/static/agent5.png",
-    "color": "#65463E"
+    "color": "#71797E"
   },
   {
     "name": "Elon Musk",
     "avatar": "app/static/agent6.png",
-    "color": "#DCBAA9"
+    "color": "#71797E"
   }
 ]

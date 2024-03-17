@@ -25,7 +25,10 @@ def handle_chat_interaction():
 
     if prompt:
         process_prompt(prompt, StepType.SPECIFICATION, "specifications.md")
-        process_prompt(prompt, StepType.SYSTEM_DESIGN, "technologies.md")
+        process_prompt(None, StepType.SYSTEM_DESIGN, "technologies.md")
+        process_prompt(None, StepType.DEVELOPMENT, None)
+        process_prompt(None, StepType.UI_DESIGN, None)
+        process_prompt(None, StepType.ENTRYPOINT, None)
 
 
 def process_prompt(prompt, step_type, markdown_file):
@@ -38,9 +41,10 @@ def process_prompt(prompt, step_type, markdown_file):
             for message in chunk.get("messages"):
                 process_message(message)
 
-    display_markdown_file(
-        f"projects/{st.session_state['project_name']}/docs/{markdown_file}"
-    )
+    if markdown_file:
+        display_markdown_file(
+            f"projects/{st.session_state['project_name']}/docs/{markdown_file}"
+        )
 
 
 def process_message(message):
