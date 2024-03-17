@@ -22,6 +22,7 @@ def init_session_states():
         "chat_ready": False,
         "user_id": lambda: str(uuid.uuid4()),
         "gpt_all_star": gpt_all_star,
+        "project_name": "sample",
     }
 
     for key, value in default_states.items():

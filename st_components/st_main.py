@@ -25,14 +25,11 @@ def st_main():
 
         if prompt:
             for chunk in st.session_state.gpt_all_star.chat(
-                message=prompt, step=StepType.SPECIFICATION, project_name="test"
+                message=prompt,
+                step=StepType.SPECIFICATION,
+                project_name=st.session_state["project_name"],
             ):
                 # st.write(chunk)
-                # if chunk.get("next"):
-                #     st.write(chunk.get("next"))
-                #     with st.spinner(f"{chunk.get('next')} is typing ..."):
-                #         pass
-
                 if chunk.get("messages"):
                     for message in chunk.get("messages"):
                         if isinstance(message, HumanMessage):
@@ -44,7 +41,9 @@ def st_main():
                             else:
                                 display_copilot_message(message.content)
 
-            display_markdown_file("projects/test/specifications.md")
+            display_markdown_file(
+                f"projects/{st.session_state['project_name']}/specifications.md"
+            )
 
 
 def load_markdown_file(path):

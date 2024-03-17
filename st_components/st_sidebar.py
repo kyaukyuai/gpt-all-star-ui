@@ -8,6 +8,12 @@ AZURE_OPEN_AI = "Azure OpenAI"
 
 def st_sidebar():
     with st.sidebar:
+        st.session_state["project_name"] = st.text_input(
+            "Project Name",
+            type="default",
+            value=st.session_state.get("project_name", "sample"),
+        )
+
         api_server = st.selectbox(
             "API Server",
             [OPEN_AI, AZURE_OPEN_AI],
