@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
 streamlit = "^1.31.1"
-gpt-all-star = "^0.0.11"
+gpt-all-star = "^0.0.12"
 streamlit-extras = "^0.4.0"
 streamlit-option-menu = "^0.3.12"
 
