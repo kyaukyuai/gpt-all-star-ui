@@ -1,13 +1,9 @@
 import streamlit as st
 from gpt_all_star.core.steps.steps import StepType
 from langchain_core.messages import HumanMessage
-from PIL import Image
 
-from st_components.st_message import (
-    display_agent_message,
-    display_copilot_message,
-    display_user_message,
-)
+from settings import settings
+from st_components.st_message import display_agent_message, display_copilot_message
 
 
 def st_main():
@@ -61,14 +57,14 @@ def process_message(message):
 
 def display_messages():
     for message in st.session_state.messages:
-        with st.chat_message(
-            message["role"], avatar=st.image(Image.open("/static/user.png"))
-        ):
-            st.markdown(message["content"])
-        if message["role"] == "user":
-            display_user_message(message["content"])
-        elif message["role"] == "copilot":
-            display_copilot_message(message["content"])
+        setting = next((s for s in settings if s["name"] == message["role"]), None)
+        if setting:
+            with st.chat_message(message["role"], avatar=setting["avatar_url"]):
+                st.markdown(message["content"])
+        # if message["role"] == "user":
+        #     display_user_message(message["content"])
+        # elif message["role"] == "copilot":
+        #     display_copilot_message(message["content"])
 
 
 def load_markdown_file(path):

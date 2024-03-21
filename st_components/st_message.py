@@ -73,7 +73,7 @@ def display_agent_message(name, text):
 
 
 def display_copilot_message(text):
-    avatar_url = "app/static/robot.png"
+    avatar_url = "app/static/copilot.png"
     message_alignment = "flex-start"
     message_bg_color = "#71797E"
     avatar_class = "bot-avatar"
