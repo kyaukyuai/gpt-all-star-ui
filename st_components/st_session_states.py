@@ -5,9 +5,8 @@ import streamlit as st
 from gpt_all_star import gpt_all_star
 
 INITIAL_MESSAGE = [
-    {"role": "user", "content": "Hi!"},
     dict(
-        role="copilot",
+        name="assistant",
         content="""Hey there, I'm copilot of GPT ALL STAR,
 What type of application would you like to build?
 """,
