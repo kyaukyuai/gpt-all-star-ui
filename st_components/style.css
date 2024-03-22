@@ -38,6 +38,10 @@ button[data-testid="baseButton-primary"]:hover {
   font-size: 12px;
 }
 
+[data-testid="stChatMessage"] {
+  background-color: rgba(240, 242, 246, 0.5);
+}
+
 /* Select box styles */
 .stSelectbox>div[data-baseweb="select"]>div {
   padding: 4px;
@@ -52,19 +56,4 @@ button[data-testid="baseButton-primary"]:hover {
   padding: 10px;
   background-color: white;
   z-index: 100;
-}
-
-/* Avatar styles */
-.user-avatar,
-.bot-avatar {
-  float: right;
-  width: 50px;
-  height: 50px;
-  margin-bottom: -10px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.bot-avatar {
-  float: left;
 }
