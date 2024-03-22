@@ -1,59 +1,20 @@
-/* Button styles */
-.stButton>button,
-.stDownloadButton>button {
-  width: 100%;
-}
-
-/* Font styles */
-h1,
-[data-testid="stMarkdownContainer"],
-[data-testid="stExpander"] {
-  font-family: ui-monospace;
-}
-
-/* Primary button styles */
-button[data-testid="baseButton-primary"] {
-  border-color: #505050;
-  background-color: #1E1E1E;
-}
-
-button[data-testid="baseButton-primary"]:hover {
-  border-color: #FC625F;
-  background-color: #1E1E1E;
-  color: #FC625F;
-}
-
-/* Sidebar styles */
 [data-testid="stSidebar"][aria-expanded="true"] {
-  min-width: 260px;
-  max-width: 260px;
-}
-
-/* Markdown styles */
-[data-testid="stMarkdown"] {
-  font-size: 12px;
-}
-
-[data-testid="stMarkdown"] h1 {
-  font-size: 12px;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 [data-testid="stChatMessage"] {
   background-color: rgba(240, 242, 246, 0.5);
 }
 
-/* Select box styles */
-.stSelectbox>div[data-baseweb="select"]>div {
-  padding: 4px;
-  font-size: 12px;
+[data-testid="element-container"] {
+  padding: 0 20px 0 0;
 }
 
-/* Input container styles */
-#input-container {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 10px;
-  background-color: white;
-  z-index: 100;
+[data-testid="stJson"] {
+  padding: 0 20px 0 0;
+}
+
+[data-testid="stMarkdownContainer"] {
+  padding: 0 20px 0 0;
 }
