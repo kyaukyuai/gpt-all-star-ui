@@ -21,24 +21,34 @@ def handle_chat_interaction():
     display_messages()
 
     if prompt:
-        process_prompt(prompt, StepType.SPECIFICATION, "specifications.md")
-        process_prompt(None, StepType.SYSTEM_DESIGN, "technologies.md")
-        process_prompt(None, StepType.DEVELOPMENT, None)
-        process_prompt(None, StepType.UI_DESIGN, None)
-        process_prompt(None, StepType.ENTRYPOINT, None)
+        step_type = StepType[st.session_state["step_type"]]
+        if step_type == StepType.DEFAULT:
+            process_prompt(prompt, StepType.SPECIFICATION, "specifications.md")
+            process_prompt(None, StepType.SYSTEM_DESIGN, "technologies.md")
+            process_prompt(None, StepType.DEVELOPMENT, None)
+            process_prompt(None, StepType.UI_DESIGN, None)
+            process_prompt(None, StepType.ENTRYPOINT, None)
+        elif step_type == StepType.SPECIFICATION:
+            process_prompt(prompt, StepType.SPECIFICATION, "specifications.md")
+        elif step_type == StepType.SYSTEM_DESIGN:
+            process_prompt(None, StepType.SYSTEM_DESIGN, "technologies.md")
+        else:
+            process_prompt(None, step_type, None)
 
 
 def process_prompt(prompt, step_type, markdown_file):
     with st.chat_message("assistant"):
         st.markdown(f"Next Step: **{step_type}**")
-    for chunk in st.session_state.gpt_all_star.chat(
-        message=prompt,
-        step=step_type,
-        project_name=st.session_state["project_name"],
-    ):
-        if chunk.get("messages") and chunk.get("next") is None:
-            for message in chunk.get("messages"):
-                process_message(message)
+
+    with st.spinner("Running..."):
+        for chunk in st.session_state.gpt_all_star.chat(
+            message=prompt,
+            step=step_type,
+            project_name=st.session_state["project_name"],
+        ):
+            if chunk.get("messages") and chunk.get("next") is None:
+                for message in chunk.get("messages"):
+                    process_message(message)
 
     if markdown_file:
         display_markdown_file(

@@ -1,6 +1,7 @@
 import os
 
 import streamlit as st
+from gpt_all_star.core.steps.steps import StepType
 
 OPEN_AI = "OpenAI"
 AZURE_OPEN_AI = "Azure OpenAI"
@@ -11,8 +12,22 @@ def st_sidebar():
         st.session_state["project_name"] = st.text_input(
             "Project Name",
             type="default",
-            value=st.session_state.get("project_name", "sample"),
+            value=st.session_state.get("project_name"),
         )
+
+        st.session_state["step_type"] = st.selectbox(
+            "Step Type",
+            [
+                StepType.DEFAULT.name,
+                StepType.SPECIFICATION.name,
+                StepType.SYSTEM_DESIGN.name,
+                StepType.DEVELOPMENT.name,
+                StepType.UI_DESIGN.name,
+                StepType.ENTRYPOINT.name,
+            ],
+        )
+
+        st.divider()
 
         api_server = st.selectbox(
             "API Server",

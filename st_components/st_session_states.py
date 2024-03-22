@@ -3,6 +3,7 @@ import uuid
 
 import streamlit as st
 from gpt_all_star import gpt_all_star
+from gpt_all_star.core.steps.steps import StepType
 
 INITIAL_MESSAGE = [
     dict(
@@ -21,7 +22,8 @@ def init_session_states():
         "chat_ready": False,
         "user_id": lambda: str(uuid.uuid4()),
         "gpt_all_star": gpt_all_star,
-        "project_name": "test",
+        "project_name": "sample",
+        "step_type": StepType.DEFAULT.name,
     }
 
     for key, value in default_states.items():

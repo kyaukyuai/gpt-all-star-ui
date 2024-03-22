@@ -16,7 +16,7 @@ os.environ["LANGCHAIN_API_KEY"] = st.secrets["LANGCHAIN_API_KEY"]
 os.environ["LANGCHAIN_PROJECT"] = st.secrets["LANGCHAIN_PROJECT"]
 
 st_init()
-st.title("🤖 GPT ALL STAR")
+st.image("static/logo-wide.png", width=420)
 init_session_states()
 st_sidebar()
 st_main()
