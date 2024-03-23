@@ -1066,12 +1066,12 @@ test = ["black", "coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre
 
 [[package]]
 name = "gpt-all-star"
-version = "0.0.15"
+version = "0.0.16"
 description = "AI-powered code generation tool for scratch development of web applications with a team collaboration of autonomous AI agents. This is a research-project, and its primary value is to explore the possibility of autonomous AI agents."
 optional = false
 python-versions = "<3.11,>=3.10.0"
 files = [
-    {file = "gpt_all_star-0.0.15.tar.gz", hash = "sha256:fd4c280b98ba9105720a997b2cce1d7a4aa89e4adc2473906bd14d510b4e27f6"},
+    {file = "gpt_all_star-0.0.16.tar.gz", hash = "sha256:26d6a3ad2ca096105d1026c25b79450ddde81f1f35ff4ac1d22b312ca655e148"},
 ]
 
 [package.dependencies]
@@ -4854,4 +4854,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "eac2d0201b7cf64d5360dc13081abf4bc3458f846420d0206fedbdac532c70c8"
+content-hash = "c2b5061cd9135db21f9ba9d1c898898f4f7de3df1ba3fe61323396e60b4931d5"

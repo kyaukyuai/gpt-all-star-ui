@@ -19,6 +19,7 @@ def st_sidebar():
             "Step Type",
             [
                 StepType.DEFAULT.name,
+                StepType.NONE.name,
                 StepType.SPECIFICATION.name,
                 StepType.SYSTEM_DESIGN.name,
                 StepType.DEVELOPMENT.name,

@@ -17,23 +17,74 @@ def handle_chat_interaction():
     prompt = st.chat_input()
     if prompt:
         st.session_state.messages.append({"name": "user", "content": prompt})
+        process_chat_prompt(prompt)
+    else:
+        display_messages()
 
+
+def process_chat_prompt(prompt):
     display_messages()
+    step_type = StepType[st.session_state["step_type"]]
+    process_step_type(prompt, step_type)
+    check_for_execution_prompt(prompt)
 
-    if prompt:
-        step_type = StepType[st.session_state["step_type"]]
-        if step_type == StepType.DEFAULT:
-            process_prompt(prompt, StepType.SPECIFICATION, "specifications.md")
-            process_prompt(None, StepType.SYSTEM_DESIGN, "technologies.md")
-            process_prompt(None, StepType.DEVELOPMENT, None)
-            process_prompt(None, StepType.UI_DESIGN, None)
-            process_prompt(None, StepType.ENTRYPOINT, None)
-        elif step_type == StepType.SPECIFICATION:
-            process_prompt(prompt, StepType.SPECIFICATION, "specifications.md")
-        elif step_type == StepType.SYSTEM_DESIGN:
-            process_prompt(None, StepType.SYSTEM_DESIGN, "technologies.md")
-        else:
-            process_prompt(None, step_type, None)
+
+def process_step_type(prompt, step_type):
+    if step_type == StepType.NONE:
+        return
+    elif step_type == StepType.DEFAULT:
+        default_step_process(prompt)
+    elif step_type in [StepType.SPECIFICATION, StepType.SYSTEM_DESIGN]:
+        process_prompt(
+            prompt if step_type == StepType.SPECIFICATION else None,
+            step_type,
+            f"{step_type.name.lower()}.md",
+        )
+    else:
+        process_prompt(None, step_type, None)
+
+
+def default_step_process(prompt):
+    for step in [
+        StepType.SPECIFICATION,
+        StepType.SYSTEM_DESIGN,
+        StepType.DEVELOPMENT,
+        StepType.UI_DESIGN,
+        StepType.ENTRYPOINT,
+    ]:
+        process_prompt(
+            prompt if step == StepType.SPECIFICATION else None,
+            step,
+            (
+                f"{step.name.lower()}.md"
+                if step in [StepType.SPECIFICATION, StepType.SYSTEM_DESIGN]
+                else None
+            ),
+        )
+
+
+def check_for_execution_prompt(prompt):
+    if prompt.lower() == "y":
+        execute_application()
+    else:
+        with st.chat_message("assistant"):
+            st.markdown("Would you like to execute the application?(y/n)")
+
+
+def execute_application():
+    with st.chat_message("assistant"):
+        st.markdown("Next Step: **execution**")
+    with st.spinner("Running..."):
+        for chunk in st.session_state.gpt_all_star.execute(
+            project_name=st.session_state["project_name"]
+        ):
+            if chunk.get("messages") and chunk.get("next") is None:
+                for message in chunk.get("messages"):
+                    process_message(message)
+        st.markdown(
+            '<iframe src="http://localhost:3000" width="800" height="600" style="border: 2px solid #ccc;"></iframe>',
+            unsafe_allow_html=True,
+        )
 
 
 def process_prompt(prompt, step_type, markdown_file):
