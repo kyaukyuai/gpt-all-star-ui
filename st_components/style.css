@@ -1,3 +1,9 @@
+/* Button styles */
+.stButton>button,
+.stDownloadButton>button {
+  width: 100%;
+}
+
 [data-testid="stSidebar"][aria-expanded="true"] {
   min-width: 300px;
   max-width: 300px;
