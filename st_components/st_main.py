@@ -99,11 +99,6 @@ def execute_application():
                 for message in chunk.get("messages"):
                     process_message(message)
 
-        st.markdown(
-            '<iframe src="http://localhost:3000" width="800" height="600" style="border: 2px solid #ccc;"></iframe>',
-            unsafe_allow_html=True,
-        )
-
 
 def process_message(message):
     if message.name in [setting["name"] for setting in settings]:
@@ -122,7 +117,14 @@ def process_message(message):
             st.markdown(message.content, unsafe_allow_html=True)
     else:
         with st.chat_message("assistant"):
-            st.markdown(message.content, unsafe_allow_html=True)
+            if "URL:" in message.content:
+                url = message.content.split("URL:")[1].strip()
+                st.markdown(
+                    f'<iframe src="{url}" width="800" height="600" style="border: 2px solid #ccc;"></iframe>',
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(message.content, unsafe_allow_html=True)
 
 
 def load_markdown_file(path):
