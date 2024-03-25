@@ -1,5 +1,9 @@
 import ast
+import os
+import subprocess
+import time
 
+import requests
 import streamlit as st
 from gpt_all_star.core.message import Message
 from gpt_all_star.core.steps.steps import StepType
@@ -11,18 +15,26 @@ def st_main():
     if not st.session_state["chat_ready"]:
         introduction()
     else:
+        step_type = StepType[st.session_state["step_type"]]
+        steps = get_steps(step_type)
+
         if "messages" not in st.session_state:
-            st.session_state["messages"] = [
-                Message.create_human_message(
-                    message="Hey there, What type of application would you like to build?",
-                )
-            ]
+            st.session_state["messages"] = (
+                [
+                    Message.create_human_message(
+                        message="Hey there, What type of application would you like to build?",
+                    )
+                ]
+                if step_type in [StepType.DEFAULT, StepType.SPECIFICATION]
+                else [
+                    Message.create_human_message(
+                        message="Would you like to execute the application?[Y/N]"
+                    )
+                ]
+            )
 
         for message in st.session_state.messages:
             process_message(message)
-
-        step_type = StepType[st.session_state["step_type"]]
-        steps = get_steps(step_type)
 
         if prompt := st.chat_input():
             user_message = Message.create_human_message(name="user", message=prompt)
@@ -30,7 +42,7 @@ def st_main():
             process_message(user_message)
 
             if prompt.lower() in ["y", "n"]:
-                if prompt == "y":
+                if prompt.lower() == "y":
                     execute_application()
                 else:
                     st.stop()
@@ -39,7 +51,7 @@ def st_main():
                     process_step(prompt, step)
 
                 execute_message = Message.create_human_message(
-                    message="Would you like to execute the application?(y/n)"
+                    message="Would you like to execute the application?[Y/N])"
                 )
                 st.session_state.messages.append(execute_message)
                 process_message(execute_message)
@@ -117,13 +129,19 @@ def process_message(message):
             st.markdown(message.content, unsafe_allow_html=True)
     else:
         with st.chat_message("assistant"):
-            if "URL:" in message.content:
-                url = message.content.split("URL:")[1].strip()
+            try:
+                content_data = ast.literal_eval(message.content)
+                url = content_data["url"]
+                command = content_data["command"]
+                os.chdir(f"projects/{st.session_state['project_name']}/app/")
+                subprocess.Popen(command, shell=True)
+                while not check_url(url):
+                    time.sleep(1)
                 st.markdown(
-                    f'<iframe src="{url}" width="800" height="600" style="border: 2px solid #ccc;"></iframe>',
+                    f'<iframe src="{url}" width="740" height="620" style="border: 1px solid #ccc; border-radius: 5px; margin: 0 10px 10px 0;"></iframe>',
                     unsafe_allow_html=True,
                 )
-            else:
+            except (SyntaxError, ValueError):
                 st.markdown(message.content, unsafe_allow_html=True)
 
 
@@ -137,6 +155,14 @@ def display_markdown_file(path):
     with st.chat_message("assistant"):
         st.info("OUTPUT", icon="ℹ️")
         st.markdown(md_content, unsafe_allow_html=True)
+
+
+def check_url(url):
+    try:
+        response = requests.get(url)
+        return response.status_code == 200
+    except requests.ConnectionError:
+        return False
 
 
 def introduction():

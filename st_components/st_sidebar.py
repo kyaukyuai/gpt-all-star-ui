@@ -7,13 +7,46 @@ OPEN_AI = "OpenAI"
 AZURE_OPEN_AI = "Azure OpenAI"
 
 
+def get_project_dirs():
+    project_base_dir = "projects/"
+    return [
+        d
+        for d in os.listdir(project_base_dir)
+        if os.path.isdir(os.path.join(project_base_dir, d))
+    ]
+
+
 def st_sidebar():
     with st.sidebar:
-        st.session_state["project_name"] = st.text_input(
-            "Project Name",
-            type="default",
-            value=st.session_state.get("project_name"),
+        project_dirs = get_project_dirs()
+
+        if "project_name" not in st.session_state:
+            st.session_state["project_name"] = ""
+
+        project_options = project_dirs + ["New Project"]
+
+        selected_project = st.selectbox(
+            "Select or create a project:",
+            project_options,
+            index=(
+                project_options.index(st.session_state["project_name"])
+                if st.session_state["project_name"] in project_options
+                else len(project_options) - 1
+            ),
         )
+
+        if selected_project == "New Project":
+            st.session_state["project_name"] = st.text_input(
+                "Enter a new project name:",
+                value=(
+                    st.session_state["project_name"]
+                    if st.session_state["project_name"] not in project_dirs
+                    else ""
+                ),
+                key="new_project_name",
+            )
+        else:
+            st.session_state["project_name"] = selected_project
 
         st.session_state["step_type"] = st.selectbox(
             "Step Type",
