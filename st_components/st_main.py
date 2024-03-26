@@ -22,7 +22,7 @@ def st_main():
             st.session_state["messages"] = (
                 [
                     Message.create_human_message(
-                        message="Hey there, What type of application would you like to build?",
+                        message="Hey there, What do you want to build?",
                     )
                 ]
                 if step_type in [StepType.DEFAULT, StepType.SPECIFICATION]
