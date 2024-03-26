@@ -12,7 +12,12 @@ This is a research-project, and its primary value is to explore the possibility 
 <h2>Table of contents</h2>
 </hr>
 
+- [Demo App](#demo-app)
 - [Getting Started](#getting-started)
+
+## Demo App
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gpt-all-star.streamlit.app/)
 
 ## Getting Started
 
