@@ -10,7 +10,6 @@ def init_session_states():
         "models": lambda: json.load(open("models.json", "r")),
         "chat_ready": False,
         "gpt_all_star": gpt_all_star,
-        "project_name": "sample",
         "step_type": StepType.DEFAULT.name,
     }
 
