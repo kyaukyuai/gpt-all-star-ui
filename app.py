@@ -18,6 +18,11 @@ os.environ["BROWSER"] = st.secrets["BROWSER"]
 
 st_init()
 st.image("static/logo-wide.png", width=420)
+st.caption(
+    """
+    🤖 AI-powered code generation tool for scratch development of web applications with a team collaboration of autonomous AI agents.
+    """
+)
 init_session_states()
 st_sidebar()
 st_main()

@@ -170,5 +170,4 @@ def introduction():
     Introduction:
     Display introductory messages for the user.
     """
-    st.info("Hey, we're very happy to see you here.", icon="👋")
     st.info("Set API Key, to be able to build your application.", icon="👉️")
