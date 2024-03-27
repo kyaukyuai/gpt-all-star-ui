@@ -9,12 +9,17 @@ from gpt_all_star.core.message import Message
 from gpt_all_star.core.steps.steps import StepType
 
 from settings import settings
+from st_components.st_fixed_component import fixed_component
 
 
 def st_main():
     if not st.session_state["chat_ready"]:
         introduction()
     else:
+        fixed_component(
+            f"Current Step: {st.session_state.get('current_step', 'Not started yet')}"
+        )
+
         step_type = StepType[st.session_state["step_type"]]
         steps = get_steps(step_type)
 
@@ -43,11 +48,19 @@ def st_main():
 
             if prompt.lower() in ["y", "n"]:
                 if prompt.lower() == "y":
+                    st.session_state["current_step"] = "EXECUTION"
+                    fixed_component(
+                        f"Current Step: {st.session_state.get('status', 'Not started yet')}"
+                    )
                     execute_application()
                 else:
                     st.stop()
             else:
                 for step in steps:
+                    st.session_state["current_step"] = step.name
+                    fixed_component(
+                        f"Current Step: {st.session_state.get('status', 'Not started yet')}"
+                    )
                     process_step(prompt, step)
 
                 execute_message = Message.create_human_message(

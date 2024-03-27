@@ -1066,12 +1066,12 @@ test = ["black", "coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre
 
 [[package]]
 name = "gpt-all-star"
-version = "0.0.19"
+version = "0.0.21"
 description = "AI-powered code generation tool for scratch development of web applications with a team collaboration of autonomous AI agents. This is a research-project, and its primary value is to explore the possibility of autonomous AI agents."
 optional = false
 python-versions = "<3.11,>=3.10.0"
 files = [
-    {file = "gpt_all_star-0.0.19.tar.gz", hash = "sha256:40be03bfa9ed120cb7f675ae9172fb55c6fe7595d51655c5f87b72893ae0a325"},
+    {file = "gpt_all_star-0.0.21.tar.gz", hash = "sha256:83c4941c7a1be0b8e35af403f8ffb8a764bf3d4d9c2452b32b31208874953851"},
 ]
 
 [package.dependencies]
@@ -1095,7 +1095,7 @@ selenium = ">=4.17.2,<5.0.0"
 termcolor = ">=2.4.0,<3.0.0"
 tiktoken = ">=0.5.2,<0.6.0"
 tree-sitter-languages = ">=1.10.2,<2.0.0"
-typer = ">=0.10.0,<0.11.0"
+typer = ">=0.11.0,<0.12.0"
 uvicorn = ">=0.29.0,<0.30.0"
 
 [[package]]
@@ -1584,17 +1584,16 @@ extended-testing = ["aiosqlite (>=0.19.0,<0.20.0)", "aleph-alpha-client (>=2.15.
 
 [[package]]
 name = "langchain-core"
-version = "0.1.33"
+version = "0.1.34"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langchain_core-0.1.33-py3-none-any.whl", hash = "sha256:cee7fbab114c74b7279a92c8a376b40344b0fa3d0f0af3143a858e3b7485bf13"},
-    {file = "langchain_core-0.1.33.tar.gz", hash = "sha256:545eff3de83cc58231bd2b0c6d672323fc2077b94d326ba1a3219118af1d1a66"},
+    {file = "langchain_core-0.1.34-py3-none-any.whl", hash = "sha256:9b4882e9dd3b612fc967acd1253a9bcb6a880b77433d20b8b87a60325b611920"},
+    {file = "langchain_core-0.1.34.tar.gz", hash = "sha256:f50612f292166f2c4ebfe76a94c4cbee310b4eb3da475fb252f3cd5d78935bff"},
 ]
 
 [package.dependencies]
-anyio = ">=3,<5"
 jsonpatch = ">=1.33,<2.0"
 langsmith = ">=0.1.0,<0.2.0"
 packaging = ">=23.2,<24.0"
@@ -1673,13 +1672,13 @@ langchain-core = ">=0.1.25,<0.2.0"
 
 [[package]]
 name = "langsmith"
-version = "0.1.31"
+version = "0.1.33"
 description = "Client library to connect to the LangSmith LLM Tracing and Evaluation Platform."
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langsmith-0.1.31-py3-none-any.whl", hash = "sha256:5211a9dc00831db307eb843485a97096484b697b5d2cd1efaac34228e97ca087"},
-    {file = "langsmith-0.1.31.tar.gz", hash = "sha256:efd54ccd44be7fda911bfdc0ead340473df2fdd07345c7252901834d0c4aa37e"},
+    {file = "langsmith-0.1.33-py3-none-any.whl", hash = "sha256:b84642d854b8f13ab6f540bb6d1c2b0e3e897add34b6d0880f3c3682c1a657fe"},
+    {file = "langsmith-0.1.33.tar.gz", hash = "sha256:d368b7817c5a871f5ef8ca73435498aec1cbe1b13419417c91a34cffa49767ad"},
 ]
 
 [package.dependencies]
@@ -1689,23 +1688,23 @@ requests = ">=2,<3"
 
 [[package]]
 name = "llama-index"
-version = "0.10.23"
+version = "0.10.24"
 description = "Interface between LLMs and your data"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "llama_index-0.10.23-py3-none-any.whl", hash = "sha256:e38a3b87fb9ba74a43bdc374351abd7f3f34f28899bbd18949daf26cb3d2ae7f"},
-    {file = "llama_index-0.10.23.tar.gz", hash = "sha256:cff74022ed8da6efb49ebf113ff6aba32c863b02a87d45179991c7736cfaf9d5"},
+    {file = "llama_index-0.10.24-py3-none-any.whl", hash = "sha256:f241b70086d109b296fc9a75fa5eaa580f9bfb48d3271bc9702b0c206ce298ab"},
+    {file = "llama_index-0.10.24.tar.gz", hash = "sha256:2ec779fb0046271cf170f4b94a78ec6dc111d51e20cdf8a1e2ce471b48c7dc8a"},
 ]
 
 [package.dependencies]
 llama-index-agent-openai = ">=0.1.4,<0.2.0"
 llama-index-cli = ">=0.1.2,<0.2.0"
-llama-index-core = ">=0.10.23,<0.11.0"
+llama-index-core = ">=0.10.24,<0.11.0"
 llama-index-embeddings-openai = ">=0.1.5,<0.2.0"
 llama-index-indices-managed-llama-cloud = ">=0.1.2,<0.2.0"
 llama-index-legacy = ">=0.9.48,<0.10.0"
-llama-index-llms-openai = ">=0.1.5,<0.2.0"
+llama-index-llms-openai = ">=0.1.13,<0.2.0"
 llama-index-multi-modal-llms-openai = ">=0.1.3,<0.2.0"
 llama-index-program-openai = ">=0.1.3,<0.2.0"
 llama-index-question-gen-openai = ">=0.1.2,<0.2.0"
@@ -1745,13 +1744,13 @@ llama-index-llms-openai = ">=0.1.1,<0.2.0"
 
 [[package]]
 name = "llama-index-core"
-version = "0.10.23.post1"
+version = "0.10.24.post1"
 description = "Interface between LLMs and your data"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "llama_index_core-0.10.23.post1-py3-none-any.whl", hash = "sha256:5a3ef75791e8236f0441b1b8d504371c07be107d9326549a70e754024792a1d2"},
-    {file = "llama_index_core-0.10.23.post1.tar.gz", hash = "sha256:0bfa8e93716b979246895601daccc73557af61a53da53d1f717222145015b0ab"},
+    {file = "llama_index_core-0.10.24.post1-py3-none-any.whl", hash = "sha256:a9d0a6e94c48fde8c9d64e549e7316883f6a0f95c78aa4a196355f6a15c5041c"},
+    {file = "llama_index_core-0.10.24.post1.tar.gz", hash = "sha256:8ddc3f5e967c91bd884a8cd4b233309c92f18aaec75998e405d6d7cc62e0e740"},
 ]
 
 [package.dependencies]
@@ -1856,17 +1855,17 @@ query-tools = ["guidance (>=0.0.64,<0.0.65)", "jsonpath-ng (>=1.6.0,<2.0.0)", "l
 
 [[package]]
 name = "llama-index-llms-openai"
-version = "0.1.12"
+version = "0.1.13"
 description = "llama-index llms openai integration"
 optional = false
-python-versions = ">=3.8.1,<4.0"
+python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "llama_index_llms_openai-0.1.12-py3-none-any.whl", hash = "sha256:75cf9ad8de0578fc8aae959f3f5f0900f496d8674cfdf97f3e064004e54d7b64"},
-    {file = "llama_index_llms_openai-0.1.12.tar.gz", hash = "sha256:400ca0083951bd668ce8bc24875ce70b636e7db328b27c6a50e6d1a2b081b9e6"},
+    {file = "llama_index_llms_openai-0.1.13-py3-none-any.whl", hash = "sha256:84b7f2d1699d882d6a92f7e8a8b203701e9a32e42924e01bccabddbe9955d3f7"},
+    {file = "llama_index_llms_openai-0.1.13.tar.gz", hash = "sha256:c0fd932255ac9bf72b6b02c3811eebbf3431aa7603aeaab31c811547f444b1ca"},
 ]
 
 [package.dependencies]
-llama-index-core = ">=0.10.20.post1,<0.11.0"
+llama-index-core = ">=0.10.24,<0.11.0"
 
 [[package]]
 name = "llama-index-multi-modal-llms-openai"
@@ -4499,24 +4498,21 @@ wsproto = ">=0.14"
 
 [[package]]
 name = "typer"
-version = "0.10.0"
+version = "0.11.0"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "typer-0.10.0-py3-none-any.whl", hash = "sha256:b8a587aa06d3c5422c09c2e9935eb80b4c9de8605fd5ab702b2f92d72246ca48"},
-    {file = "typer-0.10.0.tar.gz", hash = "sha256:597f974754520b091665f993f88abdd088bb81c56b3042225434ced0b50a788b"},
+    {file = "typer-0.11.0-py3-none-any.whl", hash = "sha256:049cc47bef39f46b043eddd9165492209fdd9bc7d79afa7ba9cc5cd017caa817"},
+    {file = "typer-0.11.0.tar.gz", hash = "sha256:a6ce173c0f03d3a41b49c0a945874cc489e91f88faabf76517b2b91c670fcde7"},
 ]
 
 [package.dependencies]
-click = ">=7.1.1,<9.0.0"
+click = ">=8.0.0"
 typing-extensions = ">=3.7.4.3"
 
 [package.extras]
 all = ["colorama (>=0.4.3,<0.5.0)", "rich (>=10.11.0,<14.0.0)", "shellingham (>=1.3.0,<2.0.0)"]
-dev = ["autoflake (>=1.3.1,<2.0.0)", "flake8 (>=3.8.3,<4.0.0)", "pre-commit (>=2.17.0,<3.0.0)"]
-doc = ["cairosvg (>=2.5.2,<3.0.0)", "mdx-include (>=1.4.1,<2.0.0)", "mkdocs (>=1.1.2,<2.0.0)", "mkdocs-material (>=8.1.4,<9.0.0)", "pillow (>=9.3.0,<10.0.0)"]
-test = ["black (>=22.3.0,<23.0.0)", "coverage (>=6.2,<7.0)", "isort (>=5.0.6,<6.0.0)", "mypy (==0.971)", "pytest (>=4.4.0,<8.0.0)", "pytest-cov (>=2.10.0,<5.0.0)", "pytest-sugar (>=0.9.4,<0.10.0)", "pytest-xdist (>=1.32.0,<4.0.0)", "rich (>=10.11.0,<14.0.0)", "shellingham (>=1.3.0,<2.0.0)"]
 
 [[package]]
 name = "typing-extensions"
@@ -4865,4 +4861,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "287a329a6f306bb4ab88e9b26414fba9863f927d86cce30b1f020427cdf4647f"
+content-hash = "081a787911878debee6fcd5ffb7c64863259aa0fbc97637fab78e21968bc4c7a"
