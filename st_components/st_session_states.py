@@ -11,6 +11,8 @@ def init_session_states():
         "chat_ready": False,
         "gpt_all_star": gpt_all_star,
         "step_type": StepType.DEFAULT.name,
+        "current_step": "Not started",
+        "messages": [],
     }
 
     for key, value in default_states.items():

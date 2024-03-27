@@ -16,27 +16,23 @@ def st_main():
     if not st.session_state["chat_ready"]:
         introduction()
     else:
-        fixed_component(
-            f"Current Step: {st.session_state.get('current_step', 'Not started yet')}"
-        )
+        fixed_component(f"Current Step: {st.session_state['current_step']}")
 
         step_type = StepType[st.session_state["step_type"]]
         steps = get_steps(step_type)
 
-        if "messages" not in st.session_state:
-            st.session_state["messages"] = (
-                [
-                    Message.create_human_message(
-                        message="Hey there, What do you want to build?",
-                    )
-                ]
-                if step_type in [StepType.DEFAULT, StepType.SPECIFICATION]
-                else [
-                    Message.create_human_message(
-                        message="Would you like to execute the application?[Y/N]"
-                    )
-                ]
-            )
+        if step_type in [StepType.DEFAULT, StepType.SPECIFICATION]:
+            st.session_state["messages"] = [
+                Message.create_human_message(
+                    message="Hey there, What do you want to build?"
+                )
+            ]
+        else:
+            st.session_state["messages"] = [
+                Message.create_human_message(
+                    message="Do you want to build the application?[Y/N]"
+                )
+            ]
 
         for message in st.session_state.messages:
             process_message(message)
@@ -46,28 +42,25 @@ def st_main():
             st.session_state.messages.append(user_message)
             process_message(user_message)
 
-            if prompt.lower() in ["y", "n"]:
-                if prompt.lower() == "y":
-                    st.session_state["current_step"] = "EXECUTION"
-                    fixed_component(
-                        f"Current Step: {st.session_state.get('status', 'Not started yet')}"
-                    )
-                    execute_application()
-                else:
-                    st.stop()
-            else:
+            if st.session_state["current_step"] == "Not started":
                 for step in steps:
                     st.session_state["current_step"] = step.name
-                    fixed_component(
-                        f"Current Step: {st.session_state.get('status', 'Not started yet')}"
-                    )
+                    fixed_component(f"Current Step: {st.session_state['current_step']}")
                     process_step(prompt, step)
 
+                st.session_state["current_step"] = "EXECUTION"
+                fixed_component(f"Current Step: {st.session_state['current_step']}")
                 execute_message = Message.create_human_message(
-                    message="Would you like to execute the application?[Y/N])"
+                    message="Would you like to execute the application?[Y/N]"
                 )
                 st.session_state.messages.append(execute_message)
                 process_message(execute_message)
+            elif st.session_state["current_step"] == "EXECUTION":
+                if prompt.lower() in ["y", "n"]:
+                    if prompt.lower() == "y":
+                        execute_application()
+                    else:
+                        st.stop()
 
 
 def get_steps(step_type: StepType):
