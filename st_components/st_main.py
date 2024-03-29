@@ -28,17 +28,14 @@ def st_main():
     for message in st.session_state.messages:
         display_message(message)
 
-    if st.session_state["current_step"] == ExtendedStepType.SYSTEM_DESIGN:
-        process_step("", ExtendedStepType.SYSTEM_DESIGN.value)
-        next_step(steps)
-    elif st.session_state["current_step"] == ExtendedStepType.DEVELOPMENT:
-        process_step("", ExtendedStepType.DEVELOPMENT.value)
-        next_step(steps)
-    elif st.session_state["current_step"] == ExtendedStepType.UI_DESIGN:
-        process_step("", ExtendedStepType.UI_DESIGN.value)
-        next_step(steps)
-    elif st.session_state["current_step"] == ExtendedStepType.ENTRYPOINT:
-        process_step("", ExtendedStepType.ENTRYPOINT.value)
+    current_step = st.session_state["current_step"]
+    if current_step in [
+        ExtendedStepType.SYSTEM_DESIGN,
+        ExtendedStepType.DEVELOPMENT,
+        ExtendedStepType.UI_DESIGN,
+        ExtendedStepType.ENTRYPOINT,
+    ]:
+        process_step("", current_step.value)
         next_step(steps)
 
     if prompt := st.chat_input():
@@ -147,15 +144,13 @@ def execute_application():
 
 
 def initialize_messages():
-    if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
-        message_text = "Hey there, What do you want to build?"
-    elif st.session_state["current_step"] in [
-        ExtendedStepType.SPECIFICATION_CHECK,
-        ExtendedStepType.SYSTEM_DESIGN_CHECK,
-    ]:
-        message_text = "What do you want to improve?"
-    elif st.session_state["current_step"] == ExtendedStepType.DEVELOPMENT:
-        message_text = "Do you want to build the application?[Y/N]"
-    else:
-        message_text = "Do you want to execute the application?[Y/N]"
+    step_messages = {
+        ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
+        ExtendedStepType.SPECIFICATION_CHECK: "What do you want to improve?",
+        ExtendedStepType.SYSTEM_DESIGN_CHECK: "What do you want to improve?",
+        ExtendedStepType.DEVELOPMENT: "Do you want to build the application?[Y/N]",
+    }
+    default_message = "Do you want to execute the application?[Y/N]"
+    current_step = st.session_state["current_step"]
+    message_text = step_messages.get(current_step, default_message)
     st.session_state["messages"] = [Message.create_human_message(message=message_text)]
