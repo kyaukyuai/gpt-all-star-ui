@@ -5,7 +5,7 @@ from src.common.file import load_file
 from src.models.extended_step_type import get_steps
 from st_components.st_current_step_type import display_current_step_type
 from st_components.st_introduction import introduction
-from st_components.st_message import display_message
+from st_components.st_message import append_and_display_message, display_message
 from st_components.st_session_states import ExtendedStepType
 
 
@@ -42,9 +42,9 @@ def st_main():
         next_step(steps)
 
     if prompt := st.chat_input():
-        user_message = Message.create_human_message(name="user", message=prompt)
-        st.session_state.messages.append(user_message)
-        display_message(user_message)
+        append_and_display_message(
+            Message.create_human_message(name="user", message=prompt)
+        )
 
         if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
             process_step(prompt, ExtendedStepType.SPECIFICATION.value)
@@ -79,16 +79,15 @@ def next_step(steps):
 
     current_step = st.session_state["current_step"]
     if current_step in step_messages:
-        message_text = step_messages[current_step]
-        message = Message.create_human_message(message=message_text)
-        st.session_state.messages.append(message)
-        display_message(message)
+        append_and_display_message(
+            Message.create_human_message(message=step_messages[current_step])
+        )
 
 
 def process_step(prompt, step_type):
-    step_message = Message.create_human_message(message=f"Next Step: **{step_type}**")
-    st.session_state.messages.append(step_message)
-    display_message(step_message)
+    append_and_display_message(
+        Message.create_human_message(message=f"Next Step: **{step_type}**")
+    )
 
     with st.spinner("Running..."):
         for chunk in st.session_state.gpt_all_star.chat(
@@ -98,8 +97,7 @@ def process_step(prompt, step_type):
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
-                    st.session_state.messages.append(message)
-                    display_message(message)
+                    append_and_display_message(message)
 
     doc_files = {
         ExtendedStepType.SPECIFICATION.name: "specifications.md",
@@ -109,9 +107,7 @@ def process_step(prompt, step_type):
     if step_type.name in doc_files:
         md_file_path = f"projects/{st.session_state['project_name']}/docs/{doc_files[step_type.name]}"
         md_content = load_file(md_file_path)
-        md_message = Message.create_human_message(message=md_content)
-        st.session_state.messages.append(md_message)
-        display_message(md_message)
+        append_and_display_message(Message.create_human_message(message=md_content))
 
 
 def improve_step(prompt, step_type):
@@ -123,8 +119,7 @@ def improve_step(prompt, step_type):
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
-                    st.session_state.messages.append(message)
-                    display_message(message)
+                    append_and_display_message(message)
 
     doc_files = {
         ExtendedStepType.SPECIFICATION.name: "specifications.md",
@@ -134,15 +129,13 @@ def improve_step(prompt, step_type):
     if step_type.name in doc_files:
         md_file_path = f"projects/{st.session_state['project_name']}/docs/{doc_files[step_type.name]}"
         md_content = load_file(md_file_path)
-        md_message = Message.create_human_message(message=md_content)
-        st.session_state.messages.append(md_message)
-        display_message(md_message)
+        append_and_display_message(Message.create_human_message(message=md_content))
 
 
 def execute_application():
-    step_message = Message.create_human_message(message="Next Step: **execution**")
-    st.session_state.messages.append(step_message)
-    display_message(step_message)
+    append_and_display_message(
+        Message.create_human_message(message="Next Step: **execution**")
+    )
 
     with st.spinner("Running..."):
         for chunk in st.session_state.gpt_all_star.execute(
@@ -150,8 +143,7 @@ def execute_application():
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
-                    st.session_state.messages.append(message)
-                    display_message(message)
+                    append_and_display_message(message)
 
 
 def initialize_messages():

@@ -41,3 +41,12 @@ def display_message(message: Message):
                 )
             except (SyntaxError, ValueError):
                 st.markdown(message.content, unsafe_allow_html=True)
+
+
+def append_message(message: Message):
+    st.session_state["messages"].append(message)
+
+
+def append_and_display_message(message: Message):
+    append_message(message)
+    display_message(message)
