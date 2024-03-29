@@ -3,79 +3,105 @@ import os
 import subprocess
 import time
 
-import requests
 import streamlit as st
 from gpt_all_star.core.message import Message
-from gpt_all_star.core.steps.steps import StepType
 
 from settings import settings
+from src.common.browser import check_url
+from src.common.file import load_file
+from src.models.extended_step_type import get_steps
 from st_components.st_fixed_component import fixed_component
+from st_components.st_introduction import introduction
+from st_components.st_session_states import ExtendedStepType
 
 
 def st_main():
     if not st.session_state["chat_ready"]:
-        introduction()
-    else:
-        fixed_component(f"Current Step: {st.session_state['current_step']}")
+        return introduction()
 
-        step_type = StepType[st.session_state["step_type"]]
-        steps = get_steps(step_type)
+    steps = get_steps(st.session_state["step_type"])
 
-        if step_type in [StepType.DEFAULT, StepType.SPECIFICATION]:
-            st.session_state["messages"] = [
-                Message.create_human_message(
-                    message="Hey there, What do you want to build?"
-                )
-            ]
+    st.session_state["current_step"] = (
+        steps.pop(st.session_state["current_step_number"])
+        if len(steps) > st.session_state["current_step_number"]
+        else ExtendedStepType.FINISHED
+    )
+    fixed_component(f"Current Step: {st.session_state['current_step'].name}")
+
+    if "messages" not in st.session_state:
+        if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
+            message_text = "Hey there, What do you want to build?"
+        elif st.session_state["current_step"] in [
+            ExtendedStepType.SPECIFICATION_CHECK,
+            ExtendedStepType.SYSTEM_DESIGN_CHECK,
+        ]:
+            message_text = "What do you want to improve?"
+        elif st.session_state["current_step"] == ExtendedStepType.DEVELOPMENT:
+            message_text = "Do you want to build the application?[Y/N]"
         else:
-            st.session_state["messages"] = [
-                Message.create_human_message(
-                    message="Do you want to build the application?[Y/N]"
-                )
-            ]
-
-        for message in st.session_state.messages:
-            process_message(message)
-
-        if prompt := st.chat_input():
-            user_message = Message.create_human_message(name="user", message=prompt)
-            st.session_state.messages.append(user_message)
-            process_message(user_message)
-
-            if st.session_state["current_step"] == "Not started":
-                for step in steps:
-                    st.session_state["current_step"] = step.name
-                    fixed_component(f"Current Step: {st.session_state['current_step']}")
-                    process_step(prompt, step)
-
-                st.session_state["current_step"] = "EXECUTION"
-                fixed_component(f"Current Step: {st.session_state['current_step']}")
-                execute_message = Message.create_human_message(
-                    message="Would you like to execute the application?[Y/N]"
-                )
-                st.session_state.messages.append(execute_message)
-                process_message(execute_message)
-            elif st.session_state["current_step"] == "EXECUTION":
-                if prompt.lower() in ["y", "n"]:
-                    if prompt.lower() == "y":
-                        execute_application()
-                    else:
-                        st.stop()
-
-
-def get_steps(step_type: StepType):
-    if step_type == StepType.NONE:
-        return []
-    elif step_type == StepType.DEFAULT:
-        return [
-            StepType.SPECIFICATION,
-            StepType.SYSTEM_DESIGN,
-            StepType.DEVELOPMENT,
-            StepType.UI_DESIGN,
-            StepType.ENTRYPOINT,
+            message_text = "Do you want to execute the application?[Y/N]"
+        st.session_state["messages"] = [
+            Message.create_human_message(message=message_text)
         ]
-    else:
-        return [step_type]
+
+    for message in st.session_state.messages:
+        process_message(message)
+
+    if st.session_state["current_step"] == ExtendedStepType.SYSTEM_DESIGN:
+        process_step("", ExtendedStepType.SYSTEM_DESIGN.value)
+        next_step(steps)
+    elif st.session_state["current_step"] == ExtendedStepType.DEVELOPMENT:
+        process_step("", ExtendedStepType.DEVELOPMENT.value)
+        next_step(steps)
+    elif st.session_state["current_step"] == ExtendedStepType.UI_DESIGN:
+        process_step("", ExtendedStepType.UI_DESIGN.value)
+        next_step(steps)
+    elif st.session_state["current_step"] == ExtendedStepType.ENTRYPOINT:
+        process_step("", ExtendedStepType.ENTRYPOINT.value)
+        next_step(steps)
+
+    if prompt := st.chat_input():
+        user_message = Message.create_human_message(name="user", message=prompt)
+        st.session_state.messages.append(user_message)
+        process_message(user_message)
+
+        if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
+            process_step(prompt, ExtendedStepType.SPECIFICATION.value)
+        elif st.session_state["current_step"] == ExtendedStepType.SPECIFICATION_CHECK:
+            improve_step(prompt, ExtendedStepType.SPECIFICATION.value)
+        elif st.session_state["current_step"] == ExtendedStepType.SYSTEM_DESIGN_CHECK:
+            improve_step(prompt, ExtendedStepType.SYSTEM_DESIGN.value)
+        elif st.session_state["current_step"] == ExtendedStepType.EXECUTION:
+            execute_application()
+        else:
+            st.error("Invalid step type")
+
+        next_step(steps)
+        st.rerun()
+
+
+def next_step(steps):
+    st.session_state["current_step"] = (
+        steps.pop(st.session_state["current_step_number"])
+        if len(steps) > st.session_state["current_step_number"]
+        else ExtendedStepType.FINISHED
+    )
+    st.session_state["current_step_number"] += 1
+    fixed_component(f"Current Step: {st.session_state['current_step'].name}")
+
+    step_messages = {
+        ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
+        ExtendedStepType.SPECIFICATION_CHECK: "What do you want to improve?",
+        ExtendedStepType.SYSTEM_DESIGN_CHECK: "What do you want to improve?",
+        ExtendedStepType.EXECUTION: "Do you want to execute the application?[Y/N]",
+    }
+
+    current_step = st.session_state["current_step"]
+    if current_step in step_messages:
+        message_text = step_messages[current_step]
+        message = Message.create_human_message(message=message_text)
+        st.session_state.messages.append(message)
+        process_message(message)
 
 
 def process_step(prompt, step_type):
@@ -91,17 +117,45 @@ def process_step(prompt, step_type):
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
-                    st.session_state.messages.append(step_message)
+                    st.session_state.messages.append(message)
                     process_message(message)
 
-    if step_type is StepType.SPECIFICATION:
-        display_markdown_file(
-            f"projects/{st.session_state['project_name']}/docs/specifications.md"
-        )
-    elif step_type is StepType.SYSTEM_DESIGN:
-        display_markdown_file(
-            f"projects/{st.session_state['project_name']}/docs/technologies.md"
-        )
+    doc_files = {
+        ExtendedStepType.SPECIFICATION.name: "specifications.md",
+        ExtendedStepType.SYSTEM_DESIGN.name: "technologies.md",
+    }
+
+    if step_type.name in doc_files:
+        md_file_path = f"projects/{st.session_state['project_name']}/docs/{doc_files[step_type.name]}"
+        md_content = load_file(md_file_path)
+        md_message = Message.create_human_message(message=md_content)
+        st.session_state.messages.append(md_message)
+        process_message(md_message)
+
+
+def improve_step(prompt, step_type):
+    with st.spinner("Running..."):
+        for chunk in st.session_state.gpt_all_star.improve(
+            message=prompt,
+            step=step_type,
+            project_name=st.session_state["project_name"],
+        ):
+            if chunk.get("messages") and chunk.get("next") is None:
+                for message in chunk.get("messages"):
+                    st.session_state.messages.append(message)
+                    process_message(message)
+
+    doc_files = {
+        ExtendedStepType.SPECIFICATION.name: "specifications.md",
+        ExtendedStepType.SYSTEM_DESIGN.name: "technologies.md",
+    }
+
+    if step_type.name in doc_files:
+        md_file_path = f"projects/{st.session_state['project_name']}/docs/{doc_files[step_type.name]}"
+        md_content = load_file(md_file_path)
+        md_message = Message.create_human_message(message=md_content)
+        st.session_state.messages.append(md_message)
+        process_message(md_message)
 
 
 def execute_application():
@@ -115,6 +169,7 @@ def execute_application():
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
+                    st.session_state.messages.append(message)
                     process_message(message)
 
 
@@ -149,31 +204,3 @@ def process_message(message):
                 )
             except (SyntaxError, ValueError):
                 st.markdown(message.content, unsafe_allow_html=True)
-
-
-def load_markdown_file(path):
-    with open(path, "r", encoding="utf-8") as file:
-        return file.read()
-
-
-def display_markdown_file(path):
-    md_content = load_markdown_file(path)
-    with st.chat_message("assistant"):
-        st.info("OUTPUT", icon="ℹ️")
-        st.markdown(md_content, unsafe_allow_html=True)
-
-
-def check_url(url):
-    try:
-        response = requests.get(url)
-        return response.status_code == 200
-    except requests.ConnectionError:
-        return False
-
-
-def introduction():
-    """
-    Introduction:
-    Display introductory messages for the user.
-    """
-    st.info("Set API Key, to be able to build your application.", icon="👉️")

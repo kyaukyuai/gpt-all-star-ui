@@ -12,7 +12,7 @@ def fixed_component(content: str):
             position: fixed;
             bottom: 100px;
             right: 80px;
-            width: 240px;
+            width: 280px;
             height: 50px;
             display: flex;
             align-items: center;

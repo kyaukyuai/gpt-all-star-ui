@@ -4,6 +4,8 @@ import streamlit as st
 from gpt_all_star import gpt_all_star
 from gpt_all_star.core.steps.steps import StepType
 
+from src.models.extended_step_type import ExtendedStepType
+
 
 def init_session_states():
     default_states = {
@@ -11,8 +13,8 @@ def init_session_states():
         "chat_ready": False,
         "gpt_all_star": gpt_all_star,
         "step_type": StepType.DEFAULT.name,
-        "current_step": "Not started",
-        "messages": [],
+        "current_step": ExtendedStepType.NOT_STARTED,
+        "current_step_number": 0,
     }
 
     for key, value in default_states.items():
