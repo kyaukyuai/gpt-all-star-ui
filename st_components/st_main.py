@@ -2,11 +2,10 @@ import streamlit as st
 from gpt_all_star.core.message import Message
 
 from src.common.file import load_file
-from src.models.extended_step_type import get_steps
+from src.models.extended_step_type import ExtendedStepType, get_steps
 from st_components.st_current_step_type import display_current_step_type
 from st_components.st_introduction import introduction
 from st_components.st_message import append_and_display_message, display_message
-from st_components.st_session_states import ExtendedStepType
 
 
 def st_main():
@@ -15,20 +14,19 @@ def st_main():
 
     steps = get_steps(st.session_state["step_type"])
 
-    st.session_state["current_step"] = (
+    current_step = (
         steps.pop(st.session_state["current_step_number"])
         if len(steps) > st.session_state["current_step_number"]
         else ExtendedStepType.FINISHED
     )
-    display_current_step_type(f"Current Step: {st.session_state['current_step'].name}")
+    display_current_step_type(f"Current Step: {current_step.name}")
 
     if "messages" not in st.session_state:
-        initialize_messages()
+        initialize_messages(current_step)
 
     for message in st.session_state.messages:
         display_message(message)
 
-    current_step = st.session_state["current_step"]
     if current_step in [
         ExtendedStepType.SYSTEM_DESIGN,
         ExtendedStepType.DEVELOPMENT,
@@ -43,13 +41,13 @@ def st_main():
             Message.create_human_message(name="user", message=prompt)
         )
 
-        if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
+        if current_step == ExtendedStepType.SPECIFICATION:
             process_step(prompt, ExtendedStepType.SPECIFICATION.value)
-        elif st.session_state["current_step"] == ExtendedStepType.SPECIFICATION_CHECK:
+        elif current_step == ExtendedStepType.SPECIFICATION_CHECK:
             improve_step(prompt, ExtendedStepType.SPECIFICATION.value)
-        elif st.session_state["current_step"] == ExtendedStepType.SYSTEM_DESIGN_CHECK:
+        elif current_step == ExtendedStepType.SYSTEM_DESIGN_CHECK:
             improve_step(prompt, ExtendedStepType.SYSTEM_DESIGN.value)
-        elif st.session_state["current_step"] == ExtendedStepType.EXECUTION:
+        elif current_step == ExtendedStepType.EXECUTION:
             execute_application()
         else:
             st.error("Invalid step type")
@@ -59,13 +57,13 @@ def st_main():
 
 
 def next_step(steps):
-    st.session_state["current_step"] = (
+    current_step = (
         steps.pop(st.session_state["current_step_number"])
         if len(steps) > st.session_state["current_step_number"]
         else ExtendedStepType.FINISHED
     )
     st.session_state["current_step_number"] += 1
-    display_current_step_type(f"Current Step: {st.session_state['current_step'].name}")
+    display_current_step_type(f"Current Step: {current_step.name}")
 
     step_messages = {
         ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
@@ -74,7 +72,6 @@ def next_step(steps):
         ExtendedStepType.EXECUTION: "Do you want to execute the application?[Y/N]",
     }
 
-    current_step = st.session_state["current_step"]
     if current_step in step_messages:
         append_and_display_message(
             Message.create_human_message(message=step_messages[current_step])
@@ -143,7 +140,7 @@ def execute_application():
                     append_and_display_message(message)
 
 
-def initialize_messages():
+def initialize_messages(current_step: ExtendedStepType):
     step_messages = {
         ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
         ExtendedStepType.SPECIFICATION_CHECK: "What do you want to improve?",
@@ -151,6 +148,5 @@ def initialize_messages():
         ExtendedStepType.DEVELOPMENT: "Do you want to build the application?[Y/N]",
     }
     default_message = "Do you want to execute the application?[Y/N]"
-    current_step = st.session_state["current_step"]
     message_text = step_messages.get(current_step, default_message)
     st.session_state["messages"] = [Message.create_human_message(message=message_text)]

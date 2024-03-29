@@ -9,8 +9,10 @@ class ExtendedStepType(Enum):
     BUILD = StepType.BUILD
     SPECIFICATION = StepType.SPECIFICATION
     SPECIFICATION_CHECK = "specification_check"
+    SPECIFICATION_IMPROVE = "specification_improve"
     SYSTEM_DESIGN = StepType.SYSTEM_DESIGN
     SYSTEM_DESIGN_CHECK = "system_design_check"
+    SYSTEM_DESIGN_IMPROVE = "system_design_improve"
     DEVELOPMENT = StepType.DEVELOPMENT
     ENTRYPOINT = StepType.ENTRYPOINT
     UI_DESIGN = StepType.UI_DESIGN

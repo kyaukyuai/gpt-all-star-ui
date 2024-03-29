@@ -2,7 +2,7 @@ import os
 
 import streamlit as st
 
-from st_components.st_session_states import ExtendedStepType
+from src.models.extended_step_type import ExtendedStepType
 
 OPEN_AI = "OpenAI"
 AZURE_OPEN_AI = "Azure OpenAI"
