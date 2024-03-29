@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-def fixed_component(content: str):
+def display_current_step_type(content: str):
     style = """
     <style>
         .fixed-component {

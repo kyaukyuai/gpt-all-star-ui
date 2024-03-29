@@ -1,17 +1,11 @@
-import ast
-import os
-import subprocess
-import time
-
 import streamlit as st
 from gpt_all_star.core.message import Message
 
-from settings import settings
-from src.common.browser import check_url
 from src.common.file import load_file
 from src.models.extended_step_type import get_steps
-from st_components.st_fixed_component import fixed_component
+from st_components.st_current_step_type import display_current_step_type
 from st_components.st_introduction import introduction
+from st_components.st_message import display_message
 from st_components.st_session_states import ExtendedStepType
 
 
@@ -26,7 +20,7 @@ def st_main():
         if len(steps) > st.session_state["current_step_number"]
         else ExtendedStepType.FINISHED
     )
-    fixed_component(f"Current Step: {st.session_state['current_step'].name}")
+    display_current_step_type(f"Current Step: {st.session_state['current_step'].name}")
 
     if "messages" not in st.session_state:
         if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
@@ -45,7 +39,7 @@ def st_main():
         ]
 
     for message in st.session_state.messages:
-        process_message(message)
+        display_message(message)
 
     if st.session_state["current_step"] == ExtendedStepType.SYSTEM_DESIGN:
         process_step("", ExtendedStepType.SYSTEM_DESIGN.value)
@@ -63,7 +57,7 @@ def st_main():
     if prompt := st.chat_input():
         user_message = Message.create_human_message(name="user", message=prompt)
         st.session_state.messages.append(user_message)
-        process_message(user_message)
+        display_message(user_message)
 
         if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
             process_step(prompt, ExtendedStepType.SPECIFICATION.value)
@@ -87,7 +81,7 @@ def next_step(steps):
         else ExtendedStepType.FINISHED
     )
     st.session_state["current_step_number"] += 1
-    fixed_component(f"Current Step: {st.session_state['current_step'].name}")
+    display_current_step_type(f"Current Step: {st.session_state['current_step'].name}")
 
     step_messages = {
         ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
@@ -101,13 +95,13 @@ def next_step(steps):
         message_text = step_messages[current_step]
         message = Message.create_human_message(message=message_text)
         st.session_state.messages.append(message)
-        process_message(message)
+        display_message(message)
 
 
 def process_step(prompt, step_type):
     step_message = Message.create_human_message(message=f"Next Step: **{step_type}**")
     st.session_state.messages.append(step_message)
-    process_message(step_message)
+    display_message(step_message)
 
     with st.spinner("Running..."):
         for chunk in st.session_state.gpt_all_star.chat(
@@ -118,7 +112,7 @@ def process_step(prompt, step_type):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
                     st.session_state.messages.append(message)
-                    process_message(message)
+                    display_message(message)
 
     doc_files = {
         ExtendedStepType.SPECIFICATION.name: "specifications.md",
@@ -130,7 +124,7 @@ def process_step(prompt, step_type):
         md_content = load_file(md_file_path)
         md_message = Message.create_human_message(message=md_content)
         st.session_state.messages.append(md_message)
-        process_message(md_message)
+        display_message(md_message)
 
 
 def improve_step(prompt, step_type):
@@ -143,7 +137,7 @@ def improve_step(prompt, step_type):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
                     st.session_state.messages.append(message)
-                    process_message(message)
+                    display_message(message)
 
     doc_files = {
         ExtendedStepType.SPECIFICATION.name: "specifications.md",
@@ -155,13 +149,13 @@ def improve_step(prompt, step_type):
         md_content = load_file(md_file_path)
         md_message = Message.create_human_message(message=md_content)
         st.session_state.messages.append(md_message)
-        process_message(md_message)
+        display_message(md_message)
 
 
 def execute_application():
     step_message = Message.create_human_message(message="Next Step: **execution**")
     st.session_state.messages.append(step_message)
-    process_message(step_message)
+    display_message(step_message)
 
     with st.spinner("Running..."):
         for chunk in st.session_state.gpt_all_star.execute(
@@ -170,37 +164,4 @@ def execute_application():
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
                     st.session_state.messages.append(message)
-                    process_message(message)
-
-
-def process_message(message):
-    if message.name in [setting["name"] for setting in settings]:
-        setting = next((s for s in settings if s["name"] == message.name), None)
-        with st.chat_message(message.name, avatar=setting["avatar_url"]):
-            try:
-                content_data = ast.literal_eval(message.content)
-                st.write(f"{message.name} is working...")
-                st.info("TODO LIST", icon="ℹ️")
-                st.json(content_data, expanded=False)
-            except (SyntaxError, ValueError):
-                st.write(f"{message.name} is working...")
-                st.markdown(message.content)
-    elif message.name is not None:
-        with st.chat_message(message.name):
-            st.markdown(message.content, unsafe_allow_html=True)
-    else:
-        with st.chat_message("assistant"):
-            try:
-                content_data = ast.literal_eval(message.content)
-                url = content_data["url"]
-                command = content_data["command"]
-                os.chdir(f"projects/{st.session_state['project_name']}/app/")
-                subprocess.Popen(command, shell=True)
-                while not check_url(url):
-                    time.sleep(1)
-                st.markdown(
-                    f'<iframe src="{url}" width="740" height="620" style="border: 1px solid #ccc; border-radius: 5px; margin: 0 10px 10px 0;"></iframe>',
-                    unsafe_allow_html=True,
-                )
-            except (SyntaxError, ValueError):
-                st.markdown(message.content, unsafe_allow_html=True)
+                    display_message(message)
