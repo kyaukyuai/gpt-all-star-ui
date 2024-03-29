@@ -23,20 +23,7 @@ def st_main():
     display_current_step_type(f"Current Step: {st.session_state['current_step'].name}")
 
     if "messages" not in st.session_state:
-        if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
-            message_text = "Hey there, What do you want to build?"
-        elif st.session_state["current_step"] in [
-            ExtendedStepType.SPECIFICATION_CHECK,
-            ExtendedStepType.SYSTEM_DESIGN_CHECK,
-        ]:
-            message_text = "What do you want to improve?"
-        elif st.session_state["current_step"] == ExtendedStepType.DEVELOPMENT:
-            message_text = "Do you want to build the application?[Y/N]"
-        else:
-            message_text = "Do you want to execute the application?[Y/N]"
-        st.session_state["messages"] = [
-            Message.create_human_message(message=message_text)
-        ]
+        initialize_messages()
 
     for message in st.session_state.messages:
         display_message(message)
@@ -165,3 +152,18 @@ def execute_application():
                 for message in chunk.get("messages"):
                     st.session_state.messages.append(message)
                     display_message(message)
+
+
+def initialize_messages():
+    if st.session_state["current_step"] == ExtendedStepType.SPECIFICATION:
+        message_text = "Hey there, What do you want to build?"
+    elif st.session_state["current_step"] in [
+        ExtendedStepType.SPECIFICATION_CHECK,
+        ExtendedStepType.SYSTEM_DESIGN_CHECK,
+    ]:
+        message_text = "What do you want to improve?"
+    elif st.session_state["current_step"] == ExtendedStepType.DEVELOPMENT:
+        message_text = "Do you want to build the application?[Y/N]"
+    else:
+        message_text = "Do you want to execute the application?[Y/N]"
+    st.session_state["messages"] = [Message.create_human_message(message=message_text)]
