@@ -7,6 +7,14 @@ from st_components.st_current_step_type import display_current_step_type
 from st_components.st_introduction import introduction
 from st_components.st_message import append_and_display_message, display_message
 
+MESSAGE = {
+    "improve": """
+    Is this okay? If so, please enter [Y].  \n
+    If you want to make any corrections, please enter them.
+    """,
+    "execute": "Do you want to execute the application?[Y/N]",
+}
+
 
 def st_main():
     if not st.session_state["chat_ready"]:
@@ -19,7 +27,7 @@ def st_main():
         if len(steps) > st.session_state["current_step_number"]
         else ExtendedStepType.FINISHED
     )
-    display_current_step_type(f"Current Step: {current_step.name}")
+    display_current_step_type(f"{current_step.name}")
 
     if "messages" not in st.session_state:
         initialize_messages(current_step)
@@ -41,18 +49,33 @@ def st_main():
             Message.create_human_message(name="user", message=prompt)
         )
 
-        if current_step == ExtendedStepType.SPECIFICATION:
-            process_step(prompt, ExtendedStepType.SPECIFICATION.value)
-        elif current_step == ExtendedStepType.SPECIFICATION_CHECK:
-            improve_step(prompt, ExtendedStepType.SPECIFICATION.value)
-        elif current_step == ExtendedStepType.SYSTEM_DESIGN_CHECK:
-            improve_step(prompt, ExtendedStepType.SYSTEM_DESIGN.value)
-        elif current_step == ExtendedStepType.EXECUTION:
-            execute_application()
-        else:
-            st.error("Invalid step type")
+        step_actions = {
+            ExtendedStepType.SPECIFICATION: lambda: process_step(
+                prompt, ExtendedStepType.SPECIFICATION.value
+            ),
+            ExtendedStepType.SPECIFICATION_IMPROVE: lambda: handle_improvement_step(
+                prompt, ExtendedStepType.SPECIFICATION
+            ),
+            ExtendedStepType.SYSTEM_DESIGN_IMPROVE: lambda: handle_improvement_step(
+                prompt, ExtendedStepType.SYSTEM_DESIGN
+            ),
+            ExtendedStepType.EXECUTION: execute_application,
+        }
 
-        next_step(steps)
+        action = step_actions.get(current_step, lambda: st.error("Invalid step type"))
+        action()
+
+        if current_step not in [ExtendedStepType.EXECUTION]:
+            next_step(steps)
+            st.rerun()
+
+
+def handle_improvement_step(prompt: str, step_type: ExtendedStepType):
+    if prompt.lower() != "y":
+        improve_step(prompt, step_type.value)
+        append_and_display_message(
+            Message.create_human_message(message=MESSAGE["improve"])
+        )
         st.rerun()
 
 
@@ -63,13 +86,12 @@ def next_step(steps):
         else ExtendedStepType.FINISHED
     )
     st.session_state["current_step_number"] += 1
-    display_current_step_type(f"Current Step: {current_step.name}")
+    display_current_step_type(f"{current_step.name}")
 
     step_messages = {
-        ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
-        ExtendedStepType.SPECIFICATION_CHECK: "What do you want to improve?",
-        ExtendedStepType.SYSTEM_DESIGN_CHECK: "What do you want to improve?",
-        ExtendedStepType.EXECUTION: "Do you want to execute the application?[Y/N]",
+        ExtendedStepType.SPECIFICATION_IMPROVE: MESSAGE["improve"],
+        ExtendedStepType.SYSTEM_DESIGN_IMPROVE: MESSAGE["improve"],
+        ExtendedStepType.EXECUTION: MESSAGE["execute"],
     }
 
     if current_step in step_messages:
@@ -143,10 +165,7 @@ def execute_application():
 def initialize_messages(current_step: ExtendedStepType):
     step_messages = {
         ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
-        ExtendedStepType.SPECIFICATION_CHECK: "What do you want to improve?",
-        ExtendedStepType.SYSTEM_DESIGN_CHECK: "What do you want to improve?",
-        ExtendedStepType.DEVELOPMENT: "Do you want to build the application?[Y/N]",
     }
-    default_message = "Do you want to execute the application?[Y/N]"
+    default_message = MESSAGE["execute"]
     message_text = step_messages.get(current_step, default_message)
     st.session_state["messages"] = [Message.create_human_message(message=message_text)]

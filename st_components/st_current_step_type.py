@@ -12,13 +12,13 @@ def display_current_step_type(content: str):
             position: fixed;
             bottom: 100px;
             right: 80px;
-            width: 280px;
-            height: 50px;
+            width: 240px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: solid 1px #EEE;
-            box-shadow: 0 1px 1px 1px rgba(51,51,51,0.1);
+            box-shadow: 0 1px 1px 0 rgba(51,51,51,0.1);
         }
     </style>
     """

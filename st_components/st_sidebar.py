@@ -53,7 +53,6 @@ def st_sidebar():
             "Step Type",
             [
                 ExtendedStepType.DEFAULT.name,
-                ExtendedStepType.BUILD.name,
                 ExtendedStepType.NONE.name,
             ],
         )
