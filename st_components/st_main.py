@@ -37,8 +37,9 @@ def st_main():
 
     if current_step in [
         ExtendedStepType.SYSTEM_DESIGN,
-        ExtendedStepType.DEVELOPMENT,
         ExtendedStepType.UI_DESIGN,
+        ExtendedStepType.DEVELOPMENT,
+        ExtendedStepType.UI_DEVELOPMENT,
         ExtendedStepType.ENTRYPOINT,
     ]:
         process_step("", current_step.value)
@@ -58,6 +59,9 @@ def st_main():
             ),
             ExtendedStepType.SYSTEM_DESIGN_IMPROVE: lambda: handle_improvement_step(
                 prompt, ExtendedStepType.SYSTEM_DESIGN
+            ),
+            ExtendedStepType.UI_DESIGN_IMPROVE: lambda: handle_improvement_step(
+                prompt, ExtendedStepType.UI_DESIGN
             ),
             ExtendedStepType.EXECUTION: execute_application,
         }
@@ -91,6 +95,7 @@ def next_step(steps):
     step_messages = {
         ExtendedStepType.SPECIFICATION_IMPROVE: MESSAGE["improve"],
         ExtendedStepType.SYSTEM_DESIGN_IMPROVE: MESSAGE["improve"],
+        ExtendedStepType.UI_DESIGN_IMPROVE: MESSAGE["improve"],
         ExtendedStepType.EXECUTION: MESSAGE["execute"],
     }
 
@@ -118,6 +123,7 @@ def process_step(prompt, step_type):
     doc_files = {
         ExtendedStepType.SPECIFICATION.name: "specifications.md",
         ExtendedStepType.SYSTEM_DESIGN.name: "technologies.md",
+        ExtendedStepType.UI_DESIGN.name: "ui_design.html",
     }
 
     if step_type.name in doc_files:
