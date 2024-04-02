@@ -147,12 +147,13 @@ def improve_step(prompt, step_type):
     doc_files = {
         ExtendedStepType.SPECIFICATION.name: "specifications.md",
         ExtendedStepType.SYSTEM_DESIGN.name: "technologies.md",
+        ExtendedStepType.UI_DESIGN.name: "ui_design.html",
     }
 
     if step_type.name in doc_files:
-        md_file_path = f"projects/{st.session_state['project_name']}/docs/{doc_files[step_type.name]}"
-        md_content = load_file(md_file_path)
-        append_and_display_message(Message.create_human_message(message=md_content))
+        file_path = f"projects/{st.session_state['project_name']}/docs/{doc_files[step_type.name]}"
+        content = load_file(file_path)
+        append_and_display_message(Message.create_human_message(message=content))
 
 
 def execute_application():
