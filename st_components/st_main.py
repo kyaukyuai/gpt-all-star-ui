@@ -44,6 +44,7 @@ def st_main():
     ]:
         process_step("", current_step.value)
         next_step(steps)
+        st.rerun()
 
     if prompt := st.chat_input():
         append_and_display_message(
