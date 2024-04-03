@@ -39,7 +39,6 @@ def st_main():
         ExtendedStepType.SYSTEM_DESIGN,
         ExtendedStepType.UI_DESIGN,
         ExtendedStepType.DEVELOPMENT,
-        ExtendedStepType.UI_DEVELOPMENT,
         ExtendedStepType.ENTRYPOINT,
     ]:
         process_step("", current_step.value)
