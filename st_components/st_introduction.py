@@ -1,4 +1,10 @@
+import toml
 import streamlit as st
+from src.common.translator import create_translator
+
+config = toml.load(".streamlit/app_config.toml")
+lang = config['language']['useLanguage']
+_ = create_translator("en" if lang == "en" else "ja")
 
 
 def introduction():
@@ -6,4 +12,4 @@ def introduction():
     Introduction:
     Display introductory messages for the user.
     """
-    st.info("Set API Key, to be able to build your application.", icon="👉️")
+    st.info(_("Set API Key, to be able to build your application."), icon="👉️")

@@ -1,11 +1,17 @@
 import os
+import toml
 
 import streamlit as st
 
 from src.models.extended_step_type import ExtendedStepType
+from src.common.translator import create_translator
 
 OPEN_AI = "OpenAI"
 AZURE_OPEN_AI = "Azure OpenAI"
+
+config = toml.load(".streamlit/app_config.toml")
+lang = config["language"]["useLanguage"]
+_ = create_translator("en" if lang == "en" else "ja")
 
 
 def get_project_dirs():
@@ -24,10 +30,10 @@ def st_sidebar():
         if "project_name" not in st.session_state:
             st.session_state["project_name"] = ""
 
-        project_options = project_dirs + ["New Project"]
+        project_options = project_dirs + [_("New Project")]
 
         selected_project = st.selectbox(
-            "Select or create a project:",
+            _("Select or create a project:"),
             project_options,
             index=(
                 project_options.index(st.session_state["project_name"])
@@ -36,9 +42,9 @@ def st_sidebar():
             ),
         )
 
-        if selected_project == "New Project":
+        if selected_project == _("New Project"):
             st.session_state["project_name"] = st.text_input(
-                "Enter a new project name:",
+                _("Enter a new project name:"),
                 value=(
                     st.session_state["project_name"]
                     if st.session_state["project_name"]
@@ -57,12 +63,12 @@ def st_sidebar():
         step_options = [ExtendedStepType.DEFAULT.display_name]
         if selected_project != "New Project":
             step_options.append(ExtendedStepType.NONE.display_name)
-        st.session_state["step_type"] = st.selectbox("Building Type", step_options)
+        st.session_state["step_type"] = st.selectbox(_("Building Type"), step_options)
 
         st.divider()
 
         api_server = st.selectbox(
-            "API Server",
+            _("API Server"),
             [OPEN_AI, AZURE_OPEN_AI],
         )
 
@@ -74,18 +80,18 @@ def st_sidebar():
 
 def set_open_ai_credentials():
     expander = st.expander(
-        label="Settings", expanded=(not st.session_state.get("chat_ready", False))
+        label=_("Settings"), expanded=(not st.session_state.get("chat_ready", False))
     )
     with expander:
         openai_key = st.text_input(
-            "OpenAI Key:", type="password", value=st.secrets.get("OPENAI_API_KEY")
+            _("OpenAI Key:"), type="password", value=st.secrets.get("OPENAI_API_KEY")
         )
         model_options = list(
             st.session_state.get("models", {}).get("openai", {}).keys()
         )
-        model = st.selectbox(label="🔌 models", options=model_options, index=0)
+        model = st.selectbox(label=_("🔌 models"), options=model_options, index=0)
 
-        if st.button("Save", key="open_ai_save_model_configs") and openai_key:
+        if st.button(_("Save"), key="open_ai_save_model_configs") and openai_key:
             update_open_ai_environment(openai_key, model)
             st.session_state["chat_ready"] = True
             st.rerun()
@@ -99,7 +105,7 @@ def update_open_ai_environment(openai_key, model):
 
 def set_azure_open_ai_credentials():
     expander = st.expander(
-        label="Settings", expanded=(not st.session_state.get("chat_ready", False))
+        label=_("Settings"), expanded=(not st.session_state.get("chat_ready", False))
     )
     with expander:
         azure_openai_key = st.text_input(
@@ -114,7 +120,7 @@ def set_azure_open_ai_credentials():
         )
         deployment_id = st.text_input(
             "Deployment ID",
-            help="The deployment name you chose when you deployed the model.",
+            help=_("The deployment name you chose when you deployed the model."),
             value=st.secrets.get("AZURE_OPENAI_DEPLOYMENT_NAME"),
         )
         if (

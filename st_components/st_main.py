@@ -1,4 +1,6 @@
+import toml
 import streamlit as st
+from src.common.translator import create_translator
 from gpt_all_star.core.message import Message
 
 from src.common.file import load_file
@@ -7,12 +9,16 @@ from st_components.st_current_step_type import display_current_step_type
 from st_components.st_introduction import introduction
 from st_components.st_message import append_and_display_message, display_message
 
+config = toml.load(".streamlit/app_config.toml")
+lang = config['language']['useLanguage']
+_ = create_translator("en" if lang == "en" else "ja")
+
 MESSAGE = {
-    "improve": """
+    "improve": _("""
     Is this okay? If so, please enter [Y].  \n
     If you want to make any corrections, please enter them.
-    """,
-    "execute": "Do you want to execute the application?[Y/N]",
+    """),
+    "execute": _("Do you want to execute the application?[Y/N]"),
 }
 
 
@@ -110,10 +116,10 @@ def next_step(steps):
 
 def process_step(prompt, step_type):
     append_and_display_message(
-        Message.create_human_message(message=f"Next Step: **{step_type}**")
+        Message.create_human_message(message=_("Next Step: **%s**") % step_type)
     )
 
-    with st.spinner("Running..."):
+    with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.chat(
             message=prompt,
             step=step_type,
@@ -136,7 +142,7 @@ def process_step(prompt, step_type):
 
 
 def improve_step(prompt, step_type):
-    with st.spinner("Running..."):
+    with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.improve(
             message=prompt,
             step=step_type,
@@ -163,7 +169,7 @@ def execute_application():
         Message.create_human_message(message="Next Step: **execution**")
     )
 
-    with st.spinner("Running..."):
+    with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.execute(
             project_name=st.session_state["project_name"]
         ):
@@ -174,7 +180,7 @@ def execute_application():
 
 def initialize_messages(current_step: ExtendedStepType):
     step_messages = {
-        ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
+        ExtendedStepType.SPECIFICATION: _("Hey there, What do you want to build?"),
     }
     default_message = MESSAGE["execute"]
     message_text = step_messages.get(current_step, default_message)

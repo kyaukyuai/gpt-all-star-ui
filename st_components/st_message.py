@@ -2,12 +2,19 @@ import ast
 import os
 import subprocess
 import time
+import toml
 
 import streamlit as st
 from gpt_all_star.core.message import Message
 
 from settings import settings
 from src.common.browser import check_url
+
+from src.common.translator import create_translator
+
+config = toml.load(".streamlit/app_config.toml")
+lang = config['language']['useLanguage']
+_ = create_translator("en" if lang == "en" else "ja")
 
 
 def display_message(message: Message):
@@ -16,11 +23,11 @@ def display_message(message: Message):
         with st.chat_message(message.name, avatar=setting["avatar_url"]):
             try:
                 content_data = ast.literal_eval(message.content)
-                st.write(f"{message.name} is working...")
+                st.write(_("%s is working...") % message.name)
                 st.info("TODO LIST", icon="ℹ️")
                 st.json(content_data, expanded=False)
             except (SyntaxError, ValueError):
-                st.write(f"{message.name} is working...")
+                st.write(_("%s is working...") % message.name)
                 st.markdown(message.content)
     elif message.name is not None:
         with st.chat_message(message.name):
