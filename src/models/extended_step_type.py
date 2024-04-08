@@ -14,6 +14,7 @@ class ExtendedStepType(Enum):
     UI_DESIGN = StepType.UI_DESIGN
     UI_DESIGN_IMPROVE = "ui_design_improve"
     DEVELOPMENT = StepType.DEVELOPMENT
+    QUALITY_ASSURANCE = StepType.QUALITY_ASSURANCE
     ENTRYPOINT = StepType.ENTRYPOINT
     HEALING = StepType.HEALING
     NOT_STARTED = "not_started"
@@ -31,12 +32,14 @@ def get_steps(step_type: str):
             ExtendedStepType.UI_DESIGN,
             ExtendedStepType.UI_DESIGN_IMPROVE,
             ExtendedStepType.DEVELOPMENT,
+            ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.ENTRYPOINT,
             ExtendedStepType.EXECUTION,
         ]
     elif step_type == ExtendedStepType.BUILD.name:
         return [
             ExtendedStepType.DEVELOPMENT,
+            ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.ENTRYPOINT,
             ExtendedStepType.EXECUTION,
         ]
