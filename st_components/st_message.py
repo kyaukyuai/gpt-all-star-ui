@@ -23,11 +23,11 @@ def display_message(message: Message):
         with st.chat_message(message.name, avatar=setting["avatar_url"]):
             try:
                 content_data = ast.literal_eval(message.content)
-                st.write(_("%s is working...") % message.name)
+                st.write(_("%s is working...") % _(message.name))
                 st.info("TODO LIST", icon="ℹ️")
                 st.json(content_data, expanded=False)
             except (SyntaxError, ValueError):
-                st.write(_("%s is working...") % message.name)
+                st.write(_("%s is working...") % _(message.name))
                 st.markdown(message.content)
     elif message.name is not None:
         with st.chat_message(message.name):

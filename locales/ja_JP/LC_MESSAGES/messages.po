@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-04-10 06:09+0900\n"
-"PO-Revision-Date: 2024-04-10 06:09+0900\n"
+"POT-Creation-Date: 2024-04-10 06:17+0900\n"
+"PO-Revision-Date: 2024-04-10 06:17+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -13,6 +13,31 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: st_components\n"
 "X-Poedit-SearchPath-1: src\n"
+"X-Poedit-SearchPath-2: .\n"
+
+#: settings.py:10
+msgid "PRODUCT_OWNER"
+msgstr "プロダクトオーナー"
+
+#: settings.py:15
+msgid "ENGINEER"
+msgstr "エンジニア"
+
+#: settings.py:20
+msgid "ARCHITECT"
+msgstr "アーキテクト"
+
+#: settings.py:25
+msgid "DESIGNER"
+msgstr "デザイナー"
+
+#: settings.py:30
+msgid "QA_ENGINEER"
+msgstr "QAエンジニア"
+
+#: settings.py:35
+msgid "PROJECT_MANAGER"
+msgstr "プロダクトマネージャー"
 
 #: src/models/extended_step_type.py:32
 msgid "Only Execution"
