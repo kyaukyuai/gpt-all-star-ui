@@ -21,9 +21,30 @@ class ExtendedStepType(Enum):
     EXECUTION = "execution"
     FINISHED = "finished"
 
+    @property
+    def display_name(self):
+        return {
+            ExtendedStepType.NONE: "Only Execution",
+            ExtendedStepType.DEFAULT: "From Scratch",
+            ExtendedStepType.BUILD: "Build",
+            ExtendedStepType.SPECIFICATION: "Specification",
+            ExtendedStepType.SPECIFICATION_IMPROVE: "Specification Improve",
+            ExtendedStepType.SYSTEM_DESIGN: "System Design",
+            ExtendedStepType.SYSTEM_DESIGN_IMPROVE: "System Design Improve",
+            ExtendedStepType.UI_DESIGN: "UI Design",
+            ExtendedStepType.UI_DESIGN_IMPROVE: "UI Design Improve",
+            ExtendedStepType.DEVELOPMENT: "Development",
+            ExtendedStepType.QUALITY_ASSURANCE: "Quality Assurance",
+            ExtendedStepType.ENTRYPOINT: "Entrypoint",
+            ExtendedStepType.HEALING: "Healing",
+            ExtendedStepType.NOT_STARTED: "Not Started",
+            ExtendedStepType.EXECUTION: "Execution",
+            ExtendedStepType.FINISHED: "Finished",
+        }[self]
+
 
 def get_steps(step_type: str):
-    if step_type == ExtendedStepType.DEFAULT.name:
+    if step_type == ExtendedStepType.DEFAULT.display_name:
         return [
             ExtendedStepType.SPECIFICATION,
             ExtendedStepType.SPECIFICATION_IMPROVE,
@@ -36,12 +57,16 @@ def get_steps(step_type: str):
             ExtendedStepType.ENTRYPOINT,
             ExtendedStepType.EXECUTION,
         ]
-    elif step_type == ExtendedStepType.BUILD.name:
+    elif step_type == ExtendedStepType.BUILD.display_name:
         return [
             ExtendedStepType.DEVELOPMENT,
             ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.ENTRYPOINT,
             ExtendedStepType.EXECUTION,
         ]
+    elif step_type == ExtendedStepType.NONE.display_name:
+        return [
+            ExtendedStepType.EXECUTION,
+        ]
     else:
-        return [ExtendedStepType.EXECUTION]
+        raise ValueError(f"Invalid step type: {step_type}")
