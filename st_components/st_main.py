@@ -17,7 +17,9 @@ MESSAGE = {
 
 
 def st_main():
-    if not st.session_state["chat_ready"] or not st.session_state["project_name"]:
+    if not (
+        st.session_state.get("chat_ready") and st.session_state.get("project_name")
+    ):
         return introduction()
 
     steps = get_steps(st.session_state["step_type"])
@@ -27,7 +29,7 @@ def st_main():
         if len(steps) > st.session_state["current_step_number"]
         else ExtendedStepType.FINISHED
     )
-    display_current_step_type(f"{current_step.name}")
+    display_current_step_type(f"{current_step.display_name}")
 
     if "messages" not in st.session_state:
         initialize_messages(current_step)
@@ -91,7 +93,7 @@ def next_step(steps):
         else ExtendedStepType.FINISHED
     )
     st.session_state["current_step_number"] += 1
-    display_current_step_type(f"{current_step.name}")
+    display_current_step_type(f"{current_step.display_name}")
 
     step_messages = {
         ExtendedStepType.SPECIFICATION_IMPROVE: MESSAGE["improve"],
