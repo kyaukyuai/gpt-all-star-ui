@@ -13,6 +13,8 @@ config = toml.load(".streamlit/app_config.toml")
 lang = config['language']['useLanguage']
 _ = create_translator("en" if lang == "en" else "ja")
 
+is_japanese_mode = lang == "ja"
+
 MESSAGE = {
     "improve": _("""
     Is this okay? If so, please enter [Y].  \n
@@ -124,6 +126,7 @@ def process_step(prompt, step_type):
             message=prompt,
             step=step_type,
             project_name=st.session_state["project_name"],
+            japanese_mode=is_japanese_mode
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
@@ -147,6 +150,7 @@ def improve_step(prompt, step_type):
             message=prompt,
             step=step_type,
             project_name=st.session_state["project_name"],
+            japanese_mode=is_japanese_mode
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
@@ -171,7 +175,8 @@ def execute_application():
 
     with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.execute(
-            project_name=st.session_state["project_name"]
+            project_name=st.session_state["project_name"],
+            japanese_mode=is_japanese_mode
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
