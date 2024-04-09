@@ -1054,12 +1054,12 @@ test = ["coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre-commit",
 
 [[package]]
 name = "gpt-all-star"
-version = "0.0.24"
+version = "0.0.25"
 description = "AI-powered code generation tool for scratch development of web applications with a team collaboration of autonomous AI agents. This is a research-project, and its primary value is to explore the possibility of autonomous AI agents."
 optional = false
 python-versions = "<3.11,>=3.10.0"
 files = [
-    {file = "gpt_all_star-0.0.24.tar.gz", hash = "sha256:19eb8485c6cabaeda5e8418d086676858c8898eb3f4d200dd8fa7eed18319fb6"},
+    {file = "gpt_all_star-0.0.25.tar.gz", hash = "sha256:14c96859b51ef2f0cf88815ca6c6e41876d5374800172a33a97fcc7621069adb"},
 ]
 
 [package.dependencies]
@@ -1305,13 +1305,13 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "joblib"
-version = "1.3.2"
+version = "1.4.0"
 description = "Lightweight pipelining with Python functions"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "joblib-1.3.2-py3-none-any.whl", hash = "sha256:ef4331c65f239985f3f2220ecc87db222f08fd22097a3dd5698f693875f8cbb9"},
-    {file = "joblib-1.3.2.tar.gz", hash = "sha256:92f865e621e17784e7955080b6d042489e3b8e294949cc44c6eac304f59772b1"},
+    {file = "joblib-1.4.0-py3-none-any.whl", hash = "sha256:42942470d4062537be4d54c83511186da1fc14ba354961a2114da91efa9a4ed7"},
+    {file = "joblib-1.4.0.tar.gz", hash = "sha256:1eb0dc091919cd384490de890cb5dfd538410a6d4b3b54eef09fb8c50b409b1c"},
 ]
 
 [[package]]
@@ -1659,13 +1659,13 @@ langchain-core = ">=0.1.38,<0.2.0"
 
 [[package]]
 name = "langsmith"
-version = "0.1.40"
+version = "0.1.41"
 description = "Client library to connect to the LangSmith LLM Tracing and Evaluation Platform."
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langsmith-0.1.40-py3-none-any.whl", hash = "sha256:aa47d0f5a1eabd5c05ac6ce2cd3e28ccfc554d366e856a27b7c3c17c443881cb"},
-    {file = "langsmith-0.1.40.tar.gz", hash = "sha256:50fdf313741cf94e978de06025fd180b56acf1d1a4549b0fd5453ef23d5461ef"},
+    {file = "langsmith-0.1.41-py3-none-any.whl", hash = "sha256:11de22b6990502c630fdfdf6906681e664c6659d2118bcd2b79d08016e770831"},
+    {file = "langsmith-0.1.41.tar.gz", hash = "sha256:1250cd6c9074ca10d40002b23d79b3017329b139fbe954248fdd7a79544e90d0"},
 ]
 
 [package.dependencies]
@@ -1905,13 +1905,13 @@ llama-index-program-openai = ">=0.1.1,<0.2.0"
 
 [[package]]
 name = "llama-index-readers-file"
-version = "0.1.13"
+version = "0.1.15"
 description = "llama-index readers file integration"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "llama_index_readers_file-0.1.13-py3-none-any.whl", hash = "sha256:692988b8c3ca2807d21a171351078b634ada2ff1682ebe4a484f82da384dfc55"},
-    {file = "llama_index_readers_file-0.1.13.tar.gz", hash = "sha256:830f06ec7b34437fc3bb5f268d235c5c7640296adb148d8f92277dceb7f0846d"},
+    {file = "llama_index_readers_file-0.1.15-py3-none-any.whl", hash = "sha256:f0d26a46d4c40334729d4506d9fbdbed8f5e187e36e22159fb48b28d67c7f240"},
+    {file = "llama_index_readers_file-0.1.15.tar.gz", hash = "sha256:98087d983a1f2d26961805217f13d24b0f23cbbe8e32d2327ae86b1ee668d3b2"},
 ]
 
 [package.dependencies]
@@ -4944,4 +4944,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "9d06d8a26b84e5d291f5ab0c348164e035ba2ea9f149392ebbc258deeb11169a"
+content-hash = "92ebe8a11d48a18ff546a9541531a070ed6aadb9cee8a92b292e9a6928bc5965"

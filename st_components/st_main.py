@@ -17,7 +17,7 @@ MESSAGE = {
 
 
 def st_main():
-    if not st.session_state["chat_ready"]:
+    if not st.session_state["chat_ready"] or not st.session_state["project_name"]:
         return introduction()
 
     steps = get_steps(st.session_state["step_type"])
