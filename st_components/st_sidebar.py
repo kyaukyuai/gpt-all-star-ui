@@ -41,10 +41,15 @@ def st_sidebar():
                 "Enter a new project name:",
                 value=(
                     st.session_state["project_name"]
-                    if st.session_state["project_name"] not in project_dirs
+                    if st.session_state["project_name"]
                     else ""
                 ),
                 key="new_project_name",
+            )
+            (
+                st.error("Enter a project name", icon="⚠️")
+                if not st.session_state["project_name"]
+                else None
             )
         else:
             st.session_state["project_name"] = selected_project
