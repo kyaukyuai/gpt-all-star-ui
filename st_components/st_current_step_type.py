@@ -17,8 +17,8 @@ def display_current_step_type(content: str):
             display: flex;
             align-items: center;
             justify-content: center;
-            border: solid 1px #EEE;
-            box-shadow: 0 1px 1px 0 rgba(51,51,51,0.1);
+            border: solid 1px #4638e4;
+            box-shadow: 0 1px 1px 0 #4638e4;
         }
     </style>
     """

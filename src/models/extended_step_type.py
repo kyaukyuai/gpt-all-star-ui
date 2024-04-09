@@ -28,14 +28,14 @@ class ExtendedStepType(Enum):
             ExtendedStepType.DEFAULT: "From Scratch",
             ExtendedStepType.BUILD: "Build",
             ExtendedStepType.SPECIFICATION: "Specification",
-            ExtendedStepType.SPECIFICATION_IMPROVE: "Specification Improve",
+            ExtendedStepType.SPECIFICATION_IMPROVE: "Specification Refinement",
             ExtendedStepType.SYSTEM_DESIGN: "System Design",
-            ExtendedStepType.SYSTEM_DESIGN_IMPROVE: "System Design Improve",
+            ExtendedStepType.SYSTEM_DESIGN_IMPROVE: "System Design Refinement",
             ExtendedStepType.UI_DESIGN: "UI Design",
-            ExtendedStepType.UI_DESIGN_IMPROVE: "UI Design Improve",
+            ExtendedStepType.UI_DESIGN_IMPROVE: "UI Design Refinement",
             ExtendedStepType.DEVELOPMENT: "Development",
             ExtendedStepType.QUALITY_ASSURANCE: "Quality Assurance",
-            ExtendedStepType.ENTRYPOINT: "Entrypoint",
+            ExtendedStepType.ENTRYPOINT: "Development",
             ExtendedStepType.HEALING: "Healing",
             ExtendedStepType.NOT_STARTED: "Not Started",
             ExtendedStepType.EXECUTION: "Execution",
@@ -53,15 +53,15 @@ def get_steps(step_type: str):
             ExtendedStepType.UI_DESIGN,
             ExtendedStepType.UI_DESIGN_IMPROVE,
             ExtendedStepType.DEVELOPMENT,
-            ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.ENTRYPOINT,
+            ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.EXECUTION,
         ]
     elif step_type == ExtendedStepType.BUILD.display_name:
         return [
             ExtendedStepType.DEVELOPMENT,
-            ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.ENTRYPOINT,
+            ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.EXECUTION,
         ]
     elif step_type == ExtendedStepType.NONE.display_name:
