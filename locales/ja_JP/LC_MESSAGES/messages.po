@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-04-10 06:17+0900\n"
-"PO-Revision-Date: 2024-04-10 06:17+0900\n"
+"PO-Revision-Date: 2024-04-10 22:40+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -41,11 +41,11 @@ msgstr "プロダクトマネージャー"
 
 #: src/models/extended_step_type.py:32
 msgid "Only Execution"
-msgstr "実行のみ"
+msgstr "アプリケーション実行のみ"
 
 #: src/models/extended_step_type.py:33
 msgid "From Scratch"
-msgstr "0から開発"
+msgstr "スクラッチ開発"
 
 #: src/models/extended_step_type.py:34
 msgid "Build"
@@ -65,7 +65,7 @@ msgstr "システム・デザイン"
 
 #: src/models/extended_step_type.py:38
 msgid "System Design Refinement"
-msgstr "システム・デザインの改良"
+msgstr "システム・デザインの改善"
 
 #: src/models/extended_step_type.py:39
 msgid "UI Design"
@@ -73,7 +73,7 @@ msgstr "UIデザイン"
 
 #: src/models/extended_step_type.py:40
 msgid "UI Design Refinement"
-msgstr "UIデザインの改良"
+msgstr "UIデザインの改善"
 
 #: src/models/extended_step_type.py:41 src/models/extended_step_type.py:43
 msgid "Development"
@@ -81,11 +81,11 @@ msgstr "開発"
 
 #: src/models/extended_step_type.py:42
 msgid "Quality Assurance"
-msgstr "品質管理"
+msgstr "QA"
 
 #: src/models/extended_step_type.py:44
 msgid "Healing"
-msgstr "修復"
+msgstr "自動修復"
 
 #: src/models/extended_step_type.py:45
 msgid "Not Started"
@@ -93,7 +93,7 @@ msgstr "未着手"
 
 #: src/models/extended_step_type.py:46
 msgid "Execution"
-msgstr "実行"
+msgstr "アプリケーション実行"
 
 #: src/models/extended_step_type.py:47
 msgid "Finished"
@@ -154,7 +154,7 @@ msgstr "新規プロジェクトの名前を入力:"
 
 #: st_components/st_sidebar.py:66
 msgid "Building Type"
-msgstr "動作種別"
+msgstr "ビルド方法"
 
 #: st_components/st_sidebar.py:71
 msgid "API Server"

@@ -1,12 +1,14 @@
-import toml
 from enum import Enum
-from src.common.translator import create_translator
 
+import toml
 from gpt_all_star.core.steps.steps import StepType
 
+from src.common.translator import create_translator
+
 config = toml.load(".streamlit/app_config.toml")
-lang = config['language']['useLanguage']
+lang = config["language"]["useLanguage"]
 _ = create_translator("en" if lang == "en" else "ja")
+
 
 class ExtendedStepType(Enum):
     NONE = StepType.NONE

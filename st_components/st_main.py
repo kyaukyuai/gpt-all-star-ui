@@ -1,25 +1,27 @@
-import toml
 import streamlit as st
-from src.common.translator import create_translator
+import toml
 from gpt_all_star.core.message import Message
 
 from src.common.file import load_file
+from src.common.translator import create_translator
 from src.models.extended_step_type import ExtendedStepType, get_steps
 from st_components.st_current_step_type import display_current_step_type
 from st_components.st_introduction import introduction
 from st_components.st_message import append_and_display_message, display_message
 
 config = toml.load(".streamlit/app_config.toml")
-lang = config['language']['useLanguage']
+lang = config["language"]["useLanguage"]
 _ = create_translator("en" if lang == "en" else "ja")
 
 is_japanese_mode = lang == "ja"
 
 MESSAGE = {
-    "improve": _("""
+    "improve": _(
+        """
     Is this okay? If so, please enter [Y].  \n
     If you want to make any corrections, please enter them.
-    """),
+    """
+    ),
     "execute": _("Do you want to execute the application?[Y/N]"),
 }
 
@@ -126,7 +128,7 @@ def process_step(prompt, step_type):
             message=prompt,
             step=step_type,
             project_name=st.session_state["project_name"],
-            japanese_mode=is_japanese_mode
+            japanese_mode=is_japanese_mode,
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
@@ -150,7 +152,7 @@ def improve_step(prompt, step_type):
             message=prompt,
             step=step_type,
             project_name=st.session_state["project_name"],
-            japanese_mode=is_japanese_mode
+            japanese_mode=is_japanese_mode,
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
@@ -176,7 +178,7 @@ def execute_application():
     with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.execute(
             project_name=st.session_state["project_name"],
-            japanese_mode=is_japanese_mode
+            japanese_mode=is_japanese_mode,
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):

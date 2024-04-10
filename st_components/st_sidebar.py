@@ -1,10 +1,10 @@
 import os
-import toml
 
 import streamlit as st
+import toml
 
-from src.models.extended_step_type import ExtendedStepType
 from src.common.translator import create_translator
+from src.models.extended_step_type import ExtendedStepType
 
 OPEN_AI = "OpenAI"
 AZURE_OPEN_AI = "Azure OpenAI"
