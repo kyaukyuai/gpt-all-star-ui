@@ -119,10 +119,6 @@ def next_step(steps):
 
 
 def process_step(prompt, step_type):
-    append_and_display_message(
-        Message.create_human_message(message=_("Next Step: **%s**") % step_type)
-    )
-
     with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.chat(
             message=prompt,
@@ -171,10 +167,6 @@ def improve_step(prompt, step_type):
 
 
 def execute_application():
-    append_and_display_message(
-        Message.create_human_message(message="Next Step: **execution**")
-    )
-
     with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.execute(
             project_name=st.session_state["project_name"],
