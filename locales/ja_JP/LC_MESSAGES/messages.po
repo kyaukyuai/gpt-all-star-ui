@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-04-10 06:17+0900\n"
-"PO-Revision-Date: 2024-04-10 22:40+0900\n"
+"POT-Creation-Date: 2024-04-11 08:43+0900\n"
+"PO-Revision-Date: 2024-04-11 09:10+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -15,29 +15,15 @@ msgstr ""
 "X-Poedit-SearchPath-1: src\n"
 "X-Poedit-SearchPath-2: .\n"
 
-#: settings.py:10
-msgid "PRODUCT_OWNER"
-msgstr "プロダクトオーナー"
-
-#: settings.py:15
-msgid "ENGINEER"
-msgstr "エンジニア"
-
-#: settings.py:20
-msgid "ARCHITECT"
-msgstr "アーキテクト"
-
-#: settings.py:25
-msgid "DESIGNER"
-msgstr "デザイナー"
-
-#: settings.py:30
-msgid "QA_ENGINEER"
-msgstr "QAエンジニア"
-
-#: settings.py:35
-msgid "PROJECT_MANAGER"
-msgstr "プロダクトマネージャー"
+#: App.py:26
+msgid ""
+"\n"
+"    🤖 AI-powered code generation tool for scratch development of web "
+"applications with a team collaboration of autonomous AI agents.\n"
+"    "
+msgstr ""
+"\n"
+"自律的 AI エージェントによる自動コード生成ツール."
 
 #: src/models/extended_step_type.py:32
 msgid "Only Execution"
@@ -99,11 +85,11 @@ msgstr "アプリケーション実行"
 msgid "Finished"
 msgstr "完了"
 
-#: st_components/st_introduction.py:15
+#: st_components/st_introduction.py:11
 msgid "Set API Key, to be able to build your application."
 msgstr "アプリケーションを構築できるようにAPIキーを設定してください。"
 
-#: st_components/st_main.py:19
+#: st_components/st_main.py:13
 msgid ""
 "\n"
 "    Is this okay? If so, please enter [Y].  \n"
@@ -117,68 +103,89 @@ msgstr ""
 "    訂正があれば記入してください。\n"
 "    "
 
-#: st_components/st_main.py:23
+#: st_components/st_main.py:18
 msgid "Do you want to execute the application?[Y/N]"
 msgstr "アプリケーションを実行しますか[Y/N]？"
 
-#: st_components/st_main.py:121
-#, python-format
-msgid "Next Step: **%s**"
-msgstr "次の作業工程: **%s**"
-
-#: st_components/st_main.py:124 st_components/st_main.py:148
-#: st_components/st_main.py:176
+#: st_components/st_main.py:115 st_components/st_main.py:139
+#: st_components/st_main.py:163
 msgid "Running..."
 msgstr "実行中…"
 
-#: st_components/st_main.py:188
+#: st_components/st_main.py:175
 msgid "Hey there, What do you want to build?"
 msgstr "こんにちは、何を作りたいですか？"
 
-#: st_components/st_message.py:26 st_components/st_message.py:30
+#: st_components/st_message.py:22 st_components/st_message.py:26
 #, python-format
 msgid "%s is working..."
 msgstr "%s が作業中…"
 
-#: st_components/st_sidebar.py:33 st_components/st_sidebar.py:45
+#: st_components/st_sidebar.py:28 st_components/st_sidebar.py:40
 msgid "New Project"
 msgstr "新規プロジェクト"
 
-#: st_components/st_sidebar.py:36
+#: st_components/st_sidebar.py:31
 msgid "Select or create a project:"
 msgstr "プロジェクトを作成または選択:"
 
-#: st_components/st_sidebar.py:47
+#: st_components/st_sidebar.py:42
 msgid "Enter a new project name:"
-msgstr "新規プロジェクトの名前を入力:"
+msgstr "新規プロジェクト名を入力:"
 
-#: st_components/st_sidebar.py:66
+#: st_components/st_sidebar.py:51
+msgid "Enter a project name"
+msgstr "プロジェクト名を入力"
+
+#: st_components/st_sidebar.py:61
 msgid "Building Type"
 msgstr "ビルド方法"
 
-#: st_components/st_sidebar.py:71
+#: st_components/st_sidebar.py:66
 msgid "API Server"
 msgstr "APIサーバー"
 
-#: st_components/st_sidebar.py:83 st_components/st_sidebar.py:108
+#: st_components/st_sidebar.py:78 st_components/st_sidebar.py:103
 msgid "Settings"
 msgstr "設定"
 
-#: st_components/st_sidebar.py:87
+#: st_components/st_sidebar.py:82
 msgid "OpenAI Key:"
 msgstr "OpenAIキー:"
 
-#: st_components/st_sidebar.py:92
+#: st_components/st_sidebar.py:87
 msgid "🔌 models"
 msgstr "🔌 言語モデル"
 
-#: st_components/st_sidebar.py:94
+#: st_components/st_sidebar.py:89
 msgid "Save"
 msgstr "保存"
 
-#: st_components/st_sidebar.py:123
+#: st_components/st_sidebar.py:118
 msgid "The deployment name you chose when you deployed the model."
 msgstr "モデルのデプロイ時にあなたが選んだデプロイ名を入力してください。"
+
+#~ msgid "PRODUCT_OWNER"
+#~ msgstr "プロダクトオーナー"
+
+#~ msgid "ENGINEER"
+#~ msgstr "エンジニア"
+
+#~ msgid "ARCHITECT"
+#~ msgstr "アーキテクト"
+
+#~ msgid "DESIGNER"
+#~ msgstr "デザイナー"
+
+#~ msgid "QA_ENGINEER"
+#~ msgstr "QAエンジニア"
+
+#~ msgid "PROJECT_MANAGER"
+#~ msgstr "プロダクトマネージャー"
+
+#, python-format
+#~ msgid "Next Step: **%s**"
+#~ msgstr "次の作業工程: **%s**"
 
 #~ msgid "Step Type"
 #~ msgstr "作業工程種別"
