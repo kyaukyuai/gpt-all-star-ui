@@ -2,21 +2,30 @@ import streamlit as st
 from gpt_all_star.core.message import Message
 
 from src.common.file import load_file
-from src.models.extended_step_type import ExtendedStepType, get_steps
 from st_components.st_current_step_type import display_current_step_type
 from st_components.st_introduction import introduction
 from st_components.st_message import append_and_display_message, display_message
+from st_components.st_models.extended_step_type import ExtendedStepType, get_steps
 
-MESSAGE = {
-    "improve": """
-    Is this okay? If so, please enter [Y].  \n
-    If you want to make any corrections, please enter them.
-    """,
-    "execute": "Do you want to execute the application?[Y/N]",
-}
+
+class MessageContent:
+    def __init__(self, translator):
+        self._ = translator
+
+    def get_message(self):
+        return {
+            "improve": self._(
+                """
+                Is this okay? If so, please enter [Y].  \n
+                If you want to make any corrections, please enter them.
+                """
+            ),
+            "execute": self._("Do you want to execute the application?[Y/N]"),
+        }
 
 
 def st_main():
+    _ = st.session_state.translator
     if not (
         st.session_state.get("chat_ready") and st.session_state.get("project_name")
     ):
@@ -78,15 +87,19 @@ def st_main():
 
 
 def handle_improvement_step(prompt: str, step_type: ExtendedStepType):
+    _ = st.session_state.translator
     if prompt.lower() != "y":
         improve_step(prompt, step_type.value)
         append_and_display_message(
-            Message.create_human_message(message=MESSAGE["improve"])
+            Message.create_human_message(
+                message=MessageContent(_).get_message()["improve"]
+            )
         )
         st.rerun()
 
 
 def next_step(steps):
+    _ = st.session_state.translator
     current_step = (
         steps.pop(st.session_state["current_step_number"])
         if len(steps) > st.session_state["current_step_number"]
@@ -96,10 +109,14 @@ def next_step(steps):
     display_current_step_type(f"{current_step.display_name}")
 
     step_messages = {
-        ExtendedStepType.SPECIFICATION_IMPROVE: MESSAGE["improve"],
-        ExtendedStepType.SYSTEM_DESIGN_IMPROVE: MESSAGE["improve"],
-        ExtendedStepType.UI_DESIGN_IMPROVE: MESSAGE["improve"],
-        ExtendedStepType.EXECUTION: MESSAGE["execute"],
+        ExtendedStepType.SPECIFICATION_IMPROVE: MessageContent(_).get_message()[
+            "improve"
+        ],
+        ExtendedStepType.SYSTEM_DESIGN_IMPROVE: MessageContent(_).get_message()[
+            "improve"
+        ],
+        ExtendedStepType.UI_DESIGN_IMPROVE: MessageContent(_).get_message()["improve"],
+        ExtendedStepType.EXECUTION: MessageContent(_).get_message()["execute"],
     }
 
     if current_step in step_messages:
@@ -109,15 +126,13 @@ def next_step(steps):
 
 
 def process_step(prompt, step_type):
-    append_and_display_message(
-        Message.create_human_message(message=f"Next Step: **{step_type}**")
-    )
-
-    with st.spinner("Running..."):
+    _ = st.session_state.translator
+    with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.chat(
             message=prompt,
             step=step_type,
             project_name=st.session_state["project_name"],
+            japanese_mode=st.session_state["lang"] == "ja",
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
@@ -136,11 +151,13 @@ def process_step(prompt, step_type):
 
 
 def improve_step(prompt, step_type):
-    with st.spinner("Running..."):
+    _ = st.session_state.translator
+    with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.improve(
             message=prompt,
             step=step_type,
             project_name=st.session_state["project_name"],
+            japanese_mode=st.session_state["lang"] == "ja",
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
@@ -159,13 +176,11 @@ def improve_step(prompt, step_type):
 
 
 def execute_application():
-    append_and_display_message(
-        Message.create_human_message(message="Next Step: **execution**")
-    )
-
-    with st.spinner("Running..."):
+    _ = st.session_state.translator
+    with st.spinner(_("Running...")):
         for chunk in st.session_state.gpt_all_star.execute(
-            project_name=st.session_state["project_name"]
+            project_name=st.session_state["project_name"],
+            japanese_mode=st.session_state["lang"] == "ja",
         ):
             if chunk.get("messages") and chunk.get("next") is None:
                 for message in chunk.get("messages"):
@@ -173,9 +188,10 @@ def execute_application():
 
 
 def initialize_messages(current_step: ExtendedStepType):
+    _ = st.session_state.translator
     step_messages = {
-        ExtendedStepType.SPECIFICATION: "Hey there, What do you want to build?",
+        ExtendedStepType.SPECIFICATION: _("Hey there, What do you want to build?"),
     }
-    default_message = MESSAGE["execute"]
+    default_message = MessageContent(_).get_message()["execute"]
     message_text = step_messages.get(current_step, default_message)
     st.session_state["messages"] = [Message.create_human_message(message=message_text)]

@@ -11,16 +11,17 @@ from src.common.browser import check_url
 
 
 def display_message(message: Message):
+    _ = st.session_state.translator
     if message.name in [setting["name"] for setting in settings]:
         setting = next((s for s in settings if s["name"] == message.name), None)
         with st.chat_message(message.name, avatar=setting["avatar_url"]):
             try:
                 content_data = ast.literal_eval(message.content)
-                st.write(f"{message.name} is working...")
+                st.write(_("%s is working...") % _(message.name))
                 st.info("TODO LIST", icon="ℹ️")
                 st.json(content_data, expanded=False)
             except (SyntaxError, ValueError):
-                st.write(f"{message.name} is working...")
+                st.write(_("%s is working...") % _(message.name))
                 st.markdown(message.content)
     elif message.name is not None:
         with st.chat_message(message.name):

@@ -1,5 +1,6 @@
 from enum import Enum
 
+import streamlit as st
 from gpt_all_star.core.steps.steps import StepType
 
 
@@ -23,23 +24,24 @@ class ExtendedStepType(Enum):
 
     @property
     def display_name(self):
+        _ = st.session_state.translator
         return {
-            ExtendedStepType.NONE: "Only Execution",
-            ExtendedStepType.DEFAULT: "From Scratch",
-            ExtendedStepType.BUILD: "Build",
-            ExtendedStepType.SPECIFICATION: "Specification",
-            ExtendedStepType.SPECIFICATION_IMPROVE: "Specification Refinement",
-            ExtendedStepType.SYSTEM_DESIGN: "System Design",
-            ExtendedStepType.SYSTEM_DESIGN_IMPROVE: "System Design Refinement",
-            ExtendedStepType.UI_DESIGN: "UI Design",
-            ExtendedStepType.UI_DESIGN_IMPROVE: "UI Design Refinement",
-            ExtendedStepType.DEVELOPMENT: "Development",
-            ExtendedStepType.QUALITY_ASSURANCE: "Quality Assurance",
-            ExtendedStepType.ENTRYPOINT: "Development",
-            ExtendedStepType.HEALING: "Healing",
-            ExtendedStepType.NOT_STARTED: "Not Started",
-            ExtendedStepType.EXECUTION: "Execution",
-            ExtendedStepType.FINISHED: "Finished",
+            ExtendedStepType.NONE: _("Only Execution"),
+            ExtendedStepType.DEFAULT: _("From Scratch"),
+            ExtendedStepType.BUILD: _("Build"),
+            ExtendedStepType.SPECIFICATION: _("Specification"),
+            ExtendedStepType.SPECIFICATION_IMPROVE: _("Specification Refinement"),
+            ExtendedStepType.SYSTEM_DESIGN: _("System Design"),
+            ExtendedStepType.SYSTEM_DESIGN_IMPROVE: _("System Design Refinement"),
+            ExtendedStepType.UI_DESIGN: _("UI Design"),
+            ExtendedStepType.UI_DESIGN_IMPROVE: _("UI Design Refinement"),
+            ExtendedStepType.DEVELOPMENT: _("Development"),
+            ExtendedStepType.QUALITY_ASSURANCE: _("Quality Assurance"),
+            ExtendedStepType.ENTRYPOINT: _("Development"),
+            ExtendedStepType.HEALING: _("Healing"),
+            ExtendedStepType.NOT_STARTED: _("Not Started"),
+            ExtendedStepType.EXECUTION: _("Execution"),
+            ExtendedStepType.FINISHED: _("Finished"),
         }[self]
 
 
