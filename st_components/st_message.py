@@ -4,19 +4,14 @@ import subprocess
 import time
 
 import streamlit as st
-import toml
 from gpt_all_star.core.message import Message
 
 from settings import settings
 from src.common.browser import check_url
-from src.common.translator import create_translator
-
-config = toml.load(".streamlit/app_config.toml")
-lang = config["language"]["useLanguage"]
-_ = create_translator("en" if lang == "en" else "ja")
 
 
 def display_message(message: Message):
+    _ = st.session_state.translator
     if message.name in [setting["name"] for setting in settings]:
         setting = next((s for s in settings if s["name"] == message.name), None)
         with st.chat_message(message.name, avatar=setting["avatar_url"]):

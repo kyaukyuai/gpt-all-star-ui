@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-04-11 08:43+0900\n"
-"PO-Revision-Date: 2024-04-11 09:10+0900\n"
+"POT-Creation-Date: 2024-04-13 00:09+0900\n"
+"PO-Revision-Date: 2024-04-13 00:16+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -15,87 +15,17 @@ msgstr ""
 "X-Poedit-SearchPath-1: src\n"
 "X-Poedit-SearchPath-2: .\n"
 
-#: App.py:26
-msgid ""
-"\n"
-"    🤖 AI-powered code generation tool for scratch development of web "
-"applications with a team collaboration of autonomous AI agents.\n"
-"    "
-msgstr ""
-"\n"
-"自律的 AI エージェントによる自動コード生成ツール."
-
-#: src/models/extended_step_type.py:32
-msgid "Only Execution"
-msgstr "アプリケーション実行のみ"
-
-#: src/models/extended_step_type.py:33
-msgid "From Scratch"
-msgstr "スクラッチ開発"
-
-#: src/models/extended_step_type.py:34
-msgid "Build"
-msgstr "ビルド"
-
-#: src/models/extended_step_type.py:35
-msgid "Specification"
-msgstr "仕様策定"
-
-#: src/models/extended_step_type.py:36
-msgid "Specification Refinement"
-msgstr "仕様の改良"
-
-#: src/models/extended_step_type.py:37
-msgid "System Design"
-msgstr "システム・デザイン"
-
-#: src/models/extended_step_type.py:38
-msgid "System Design Refinement"
-msgstr "システム・デザインの改善"
-
-#: src/models/extended_step_type.py:39
-msgid "UI Design"
-msgstr "UIデザイン"
-
-#: src/models/extended_step_type.py:40
-msgid "UI Design Refinement"
-msgstr "UIデザインの改善"
-
-#: src/models/extended_step_type.py:41 src/models/extended_step_type.py:43
-msgid "Development"
-msgstr "開発"
-
-#: src/models/extended_step_type.py:42
-msgid "Quality Assurance"
-msgstr "QA"
-
-#: src/models/extended_step_type.py:44
-msgid "Healing"
-msgstr "自動修復"
-
-#: src/models/extended_step_type.py:45
-msgid "Not Started"
-msgstr "未着手"
-
-#: src/models/extended_step_type.py:46
-msgid "Execution"
-msgstr "アプリケーション実行"
-
-#: src/models/extended_step_type.py:47
-msgid "Finished"
-msgstr "完了"
-
-#: st_components/st_introduction.py:11
+#: st_components/st_introduction.py:10
 msgid "Set API Key, to be able to build your application."
 msgstr "アプリケーションを構築できるようにAPIキーを設定してください。"
 
-#: st_components/st_main.py:13
+#: st_components/st_main.py:18
 msgid ""
 "\n"
-"    Is this okay? If so, please enter [Y].  \n"
+"                Is this okay? If so, please enter [Y].  \n"
 "\n"
-"    If you want to make any corrections, please enter them.\n"
-"    "
+"                If you want to make any corrections, please enter them.\n"
+"                "
 msgstr ""
 "\n"
 "    これでいいですか？よければ[Y]を入力してください。\n"
@@ -103,23 +33,84 @@ msgstr ""
 "    訂正があれば記入してください。\n"
 "    "
 
-#: st_components/st_main.py:18
+#: st_components/st_main.py:23
 msgid "Do you want to execute the application?[Y/N]"
 msgstr "アプリケーションを実行しますか[Y/N]？"
 
-#: st_components/st_main.py:115 st_components/st_main.py:139
-#: st_components/st_main.py:163
+#: st_components/st_main.py:130 st_components/st_main.py:155
+#: st_components/st_main.py:180
 msgid "Running..."
 msgstr "実行中…"
 
-#: st_components/st_main.py:175
+#: st_components/st_main.py:193
 msgid "Hey there, What do you want to build?"
 msgstr "こんにちは、何を作りたいですか？"
 
-#: st_components/st_message.py:22 st_components/st_message.py:26
+#: st_components/st_message.py:20 st_components/st_message.py:24
 #, python-format
 msgid "%s is working..."
 msgstr "%s が作業中…"
+
+#: st_components/st_models/extended_step_type.py:29
+msgid "Only Execution"
+msgstr "アプリケーション実行のみ"
+
+#: st_components/st_models/extended_step_type.py:30
+msgid "From Scratch"
+msgstr "スクラッチ開発"
+
+#: st_components/st_models/extended_step_type.py:31
+msgid "Build"
+msgstr "ビルド"
+
+#: st_components/st_models/extended_step_type.py:32
+msgid "Specification"
+msgstr "仕様策定"
+
+#: st_components/st_models/extended_step_type.py:33
+msgid "Specification Refinement"
+msgstr "仕様の改善"
+
+#: st_components/st_models/extended_step_type.py:34
+msgid "System Design"
+msgstr "システム・デザイン"
+
+#: st_components/st_models/extended_step_type.py:35
+msgid "System Design Refinement"
+msgstr "システム・デザインの改善"
+
+#: st_components/st_models/extended_step_type.py:36
+msgid "UI Design"
+msgstr "UIデザイン"
+
+#: st_components/st_models/extended_step_type.py:37
+msgid "UI Design Refinement"
+msgstr "UIデザインの改善"
+
+#: st_components/st_models/extended_step_type.py:38
+#: st_components/st_models/extended_step_type.py:40
+msgid "Development"
+msgstr "開発"
+
+#: st_components/st_models/extended_step_type.py:39
+msgid "Quality Assurance"
+msgstr "QA"
+
+#: st_components/st_models/extended_step_type.py:41
+msgid "Healing"
+msgstr "自動修復"
+
+#: st_components/st_models/extended_step_type.py:42
+msgid "Not Started"
+msgstr "未着手"
+
+#: st_components/st_models/extended_step_type.py:43
+msgid "Execution"
+msgstr "アプリケーション実行"
+
+#: st_components/st_models/extended_step_type.py:44
+msgid "Finished"
+msgstr "完了"
 
 #: st_components/st_sidebar.py:28 st_components/st_sidebar.py:40
 msgid "New Project"
@@ -145,47 +136,54 @@ msgstr "ビルド方法"
 msgid "API Server"
 msgstr "APIサーバー"
 
-#: st_components/st_sidebar.py:78 st_components/st_sidebar.py:103
+#: st_components/st_sidebar.py:79 st_components/st_sidebar.py:105
 msgid "Settings"
 msgstr "設定"
 
-#: st_components/st_sidebar.py:82
+#: st_components/st_sidebar.py:83
 msgid "OpenAI Key:"
 msgstr "OpenAIキー:"
 
-#: st_components/st_sidebar.py:87
+#: st_components/st_sidebar.py:88
 msgid "🔌 models"
 msgstr "🔌 言語モデル"
 
-#: st_components/st_sidebar.py:89
+#: st_components/st_sidebar.py:90
 msgid "Save"
 msgstr "保存"
 
-#: st_components/st_sidebar.py:118
+#: st_components/st_sidebar.py:120
 msgid "The deployment name you chose when you deployed the model."
 msgstr "モデルのデプロイ時にあなたが選んだデプロイ名を入力してください。"
 
-#~ msgid "PRODUCT_OWNER"
-#~ msgstr "プロダクトオーナー"
+msgid ""
+"\n"
+"    🤖 AI-powered code generation tool for scratch development of web applications with a team collaboration of autonomous AI agents.\n"
+"    "
+msgstr ""
+"\n"
+"    🤖 自律的 AI エージェントによる自動コード生成ツール."
 
-#~ msgid "ENGINEER"
-#~ msgstr "エンジニア"
+msgid "PRODUCT_OWNER"
+msgstr "プロダクトオーナー"
 
-#~ msgid "ARCHITECT"
-#~ msgstr "アーキテクト"
+msgid "ENGINEER"
+msgstr "エンジニア"
 
-#~ msgid "DESIGNER"
-#~ msgstr "デザイナー"
+msgid "ARCHITECT"
+msgstr "アーキテクト"
 
-#~ msgid "QA_ENGINEER"
-#~ msgstr "QAエンジニア"
+msgid "DESIGNER"
+msgstr "デザイナー"
 
-#~ msgid "PROJECT_MANAGER"
-#~ msgstr "プロダクトマネージャー"
+msgid "QA_ENGINEER"
+msgstr "QAエンジニア"
 
-#, python-format
-#~ msgid "Next Step: **%s**"
-#~ msgstr "次の作業工程: **%s**"
+msgid "PROJECT_MANAGER"
+msgstr "プロジェクトマネージャー"
 
-#~ msgid "Step Type"
-#~ msgstr "作業工程種別"
+msgid "Next Step: **%s**"
+msgstr "次の作業工程: **%s**"
+
+msgid "Step Type"
+msgstr "作業工程種別"

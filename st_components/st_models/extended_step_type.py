@@ -1,13 +1,7 @@
 from enum import Enum
 
-import toml
+import streamlit as st
 from gpt_all_star.core.steps.steps import StepType
-
-from src.common.translator import create_translator
-
-config = toml.load(".streamlit/app_config.toml")
-lang = config["language"]["useLanguage"]
-_ = create_translator("en" if lang == "en" else "ja")
 
 
 class ExtendedStepType(Enum):
@@ -30,6 +24,7 @@ class ExtendedStepType(Enum):
 
     @property
     def display_name(self):
+        _ = st.session_state.translator
         return {
             ExtendedStepType.NONE: _("Only Execution"),
             ExtendedStepType.DEFAULT: _("From Scratch"),

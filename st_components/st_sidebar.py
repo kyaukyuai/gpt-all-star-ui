@@ -1,17 +1,11 @@
 import os
 
 import streamlit as st
-import toml
 
-from src.common.translator import create_translator
-from src.models.extended_step_type import ExtendedStepType
+from st_components.st_models.extended_step_type import ExtendedStepType
 
 OPEN_AI = "OpenAI"
 AZURE_OPEN_AI = "Azure OpenAI"
-
-config = toml.load(".streamlit/app_config.toml")
-lang = config["language"]["useLanguage"]
-_ = create_translator("en" if lang == "en" else "ja")
 
 
 def get_project_dirs():
@@ -24,6 +18,7 @@ def get_project_dirs():
 
 
 def st_sidebar():
+    _ = st.session_state.translator
     with st.sidebar:
         project_dirs = get_project_dirs()
 
@@ -53,7 +48,7 @@ def st_sidebar():
                 key="new_project_name",
             )
             (
-                st.error("Enter a project name", icon="⚠️")
+                st.error(_("Enter a project name"), icon="⚠️")
                 if not st.session_state["project_name"]
                 else None
             )
@@ -79,6 +74,7 @@ def st_sidebar():
 
 
 def set_open_ai_credentials():
+    _ = st.session_state.translator
     expander = st.expander(
         label=_("Settings"), expanded=(not st.session_state.get("chat_ready", False))
     )
@@ -104,6 +100,7 @@ def update_open_ai_environment(openai_key, model):
 
 
 def set_azure_open_ai_credentials():
+    _ = st.session_state.translator
     expander = st.expander(
         label=_("Settings"), expanded=(not st.session_state.get("chat_ready", False))
     )

@@ -12,6 +12,8 @@ def init_session_states():
         "gpt_all_star": gpt_all_star,
         "step_type": StepType.DEFAULT.name,
         "current_step_number": 0,
+        "lang": "en",
+        "translator": None,
     }
 
     for key, value in default_states.items():

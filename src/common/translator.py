@@ -5,10 +5,14 @@ import os
 class Translator:
     DEFAULT_LOCALE_PATH = "locales"
 
-    def __init__(self, lang, locale_dir):
-        full_locale_dir = os.path.join(os.getcwd(), locale_dir)
+    def __init__(self, lang, locale_dir=DEFAULT_LOCALE_PATH):
+        self.lang = lang
+        self.locale_dir = os.path.join(os.getcwd(), locale_dir)
+        self._init_translator()
+
+    def _init_translator(self):
         self.translator = gettext.translation(
-            "messages", full_locale_dir, languages=[lang], fallback=True
+            "messages", self.locale_dir, languages=[self.lang], fallback=True
         )
         self.translator.install()
 
@@ -16,17 +20,7 @@ class Translator:
         return self.translator.gettext(msg)
 
 
-def setup_i18n(lang, path=Translator.DEFAULT_LOCALE_PATH):
-    translator = Translator(lang, path)
-
-    def _(message):
-        return translator.translate(message)
-
-    return _
-
-
 def create_translator(lang):
-    if lang == "ja":
-        return setup_i18n("ja_JP")
-    else:
-        return setup_i18n("en")
+    lang_map = {"ja": "ja_JP", "en": "en"}
+    selected_lang = lang_map.get(lang, "en")
+    return Translator(selected_lang).translate
