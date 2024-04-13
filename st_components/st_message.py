@@ -42,6 +42,8 @@ def display_message(message: Message):
                 )
             except (SyntaxError, ValueError):
                 st.markdown(message.content, unsafe_allow_html=True)
+            except Exception:
+                st.markdown(message.content, unsafe_allow_html=True)
 
 
 def append_message(message: Message):

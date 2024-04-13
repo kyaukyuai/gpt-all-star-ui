@@ -21,6 +21,7 @@ class MessageContent:
                 """
             ),
             "execute": self._("Do you want to execute the application?[Y/N]"),
+            "deploy": self._("Do you want to push the code to GitHub?[Y/N]"),
         }
 
 
@@ -76,6 +77,7 @@ def st_main():
                 prompt, ExtendedStepType.UI_DESIGN
             ),
             ExtendedStepType.EXECUTION: execute_application,
+            ExtendedStepType.DEPLOYMENT: deploy_application,
         }
 
         action = step_actions.get(current_step, lambda: st.error("Invalid step type"))
@@ -117,6 +119,7 @@ def next_step(steps):
         ],
         ExtendedStepType.UI_DESIGN_IMPROVE: MessageContent(_).get_message()["improve"],
         ExtendedStepType.EXECUTION: MessageContent(_).get_message()["execute"],
+        ExtendedStepType.DEPLOYMENT: MessageContent(_).get_message()["deploy"],
     }
 
     if current_step in step_messages:
@@ -187,10 +190,23 @@ def execute_application():
                     append_and_display_message(message)
 
 
+def deploy_application():
+    _ = st.session_state.translator
+    with st.spinner(_("Running...")):
+        for chunk in st.session_state.gpt_all_star.deploy(
+            project_name=st.session_state["project_name"],
+            japanese_mode=st.session_state["lang"] == "ja",
+        ):
+            if chunk.get("messages") and chunk.get("next") is None:
+                for message in chunk.get("messages"):
+                    append_and_display_message(message)
+
+
 def initialize_messages(current_step: ExtendedStepType):
     _ = st.session_state.translator
     step_messages = {
         ExtendedStepType.SPECIFICATION: _("Hey there, What do you want to build?"),
+        ExtendedStepType.DEPLOYMENT: _("Do you want to push the code to GitHub?[Y/N]"),
     }
     default_message = MessageContent(_).get_message()["execute"]
     message_text = step_messages.get(current_step, default_message)

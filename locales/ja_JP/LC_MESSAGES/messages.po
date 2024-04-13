@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-04-13 00:09+0900\n"
-"PO-Revision-Date: 2024-04-13 00:16+0900\n"
+"POT-Creation-Date: 2024-04-13 11:23+0900\n"
+"PO-Revision-Date: 2024-04-13 11:24+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -37,12 +37,16 @@ msgstr ""
 msgid "Do you want to execute the application?[Y/N]"
 msgstr "アプリケーションを実行しますか[Y/N]？"
 
-#: st_components/st_main.py:130 st_components/st_main.py:155
-#: st_components/st_main.py:180
+#: st_components/st_main.py:24 st_components/st_main.py:209
+msgid "Do you want to push the code to GitHub?[Y/N]"
+msgstr "ソースコードをGitHub で管理しますか[Y/N]？"
+
+#: st_components/st_main.py:133 st_components/st_main.py:158
+#: st_components/st_main.py:183 st_components/st_main.py:195
 msgid "Running..."
 msgstr "実行中…"
 
-#: st_components/st_main.py:193
+#: st_components/st_main.py:208
 msgid "Hey there, What do you want to build?"
 msgstr "こんにちは、何を作りたいですか？"
 
@@ -51,64 +55,68 @@ msgstr "こんにちは、何を作りたいですか？"
 msgid "%s is working..."
 msgstr "%s が作業中…"
 
-#: st_components/st_models/extended_step_type.py:29
+#: st_components/st_models/extended_step_type.py:30
 msgid "Only Execution"
 msgstr "アプリケーション実行のみ"
 
-#: st_components/st_models/extended_step_type.py:30
+#: st_components/st_models/extended_step_type.py:31
 msgid "From Scratch"
 msgstr "スクラッチ開発"
 
-#: st_components/st_models/extended_step_type.py:31
+#: st_components/st_models/extended_step_type.py:32
 msgid "Build"
 msgstr "ビルド"
 
-#: st_components/st_models/extended_step_type.py:32
+#: st_components/st_models/extended_step_type.py:33
 msgid "Specification"
 msgstr "仕様策定"
 
-#: st_components/st_models/extended_step_type.py:33
+#: st_components/st_models/extended_step_type.py:34
 msgid "Specification Refinement"
 msgstr "仕様の改善"
 
-#: st_components/st_models/extended_step_type.py:34
+#: st_components/st_models/extended_step_type.py:35
 msgid "System Design"
 msgstr "システム・デザイン"
 
-#: st_components/st_models/extended_step_type.py:35
+#: st_components/st_models/extended_step_type.py:36
 msgid "System Design Refinement"
 msgstr "システム・デザインの改善"
 
-#: st_components/st_models/extended_step_type.py:36
+#: st_components/st_models/extended_step_type.py:37
 msgid "UI Design"
 msgstr "UIデザイン"
 
-#: st_components/st_models/extended_step_type.py:37
+#: st_components/st_models/extended_step_type.py:38
 msgid "UI Design Refinement"
 msgstr "UIデザインの改善"
 
-#: st_components/st_models/extended_step_type.py:38
-#: st_components/st_models/extended_step_type.py:40
+#: st_components/st_models/extended_step_type.py:39
+#: st_components/st_models/extended_step_type.py:41
 msgid "Development"
 msgstr "開発"
 
-#: st_components/st_models/extended_step_type.py:39
+#: st_components/st_models/extended_step_type.py:40
 msgid "Quality Assurance"
 msgstr "QA"
 
-#: st_components/st_models/extended_step_type.py:41
+#: st_components/st_models/extended_step_type.py:42
 msgid "Healing"
 msgstr "自動修復"
 
-#: st_components/st_models/extended_step_type.py:42
+#: st_components/st_models/extended_step_type.py:43
 msgid "Not Started"
 msgstr "未着手"
 
-#: st_components/st_models/extended_step_type.py:43
+#: st_components/st_models/extended_step_type.py:44
 msgid "Execution"
 msgstr "アプリケーション実行"
 
-#: st_components/st_models/extended_step_type.py:44
+#: st_components/st_models/extended_step_type.py:45
+msgid "Version Management"
+msgstr "ソースコード管理"
+
+#: st_components/st_models/extended_step_type.py:46
 msgid "Finished"
 msgstr "完了"
 
@@ -128,31 +136,31 @@ msgstr "新規プロジェクト名を入力:"
 msgid "Enter a project name"
 msgstr "プロジェクト名を入力"
 
-#: st_components/st_sidebar.py:61
+#: st_components/st_sidebar.py:68
 msgid "Building Type"
 msgstr "ビルド方法"
 
-#: st_components/st_sidebar.py:66
+#: st_components/st_sidebar.py:73
 msgid "API Server"
 msgstr "APIサーバー"
 
-#: st_components/st_sidebar.py:79 st_components/st_sidebar.py:105
+#: st_components/st_sidebar.py:86 st_components/st_sidebar.py:112
 msgid "Settings"
 msgstr "設定"
 
-#: st_components/st_sidebar.py:83
+#: st_components/st_sidebar.py:90
 msgid "OpenAI Key:"
 msgstr "OpenAIキー:"
 
-#: st_components/st_sidebar.py:88
+#: st_components/st_sidebar.py:95
 msgid "🔌 models"
 msgstr "🔌 言語モデル"
 
-#: st_components/st_sidebar.py:90
+#: st_components/st_sidebar.py:97
 msgid "Save"
 msgstr "保存"
 
-#: st_components/st_sidebar.py:120
+#: st_components/st_sidebar.py:127
 msgid "The deployment name you chose when you deployed the model."
 msgstr "モデルのデプロイ時にあなたが選んだデプロイ名を入力してください。"
 
