@@ -14,6 +14,7 @@ gpt-all-star = "^0.0.27"
 streamlit-extras = "^0.4.0"
 streamlit-option-menu = "^0.3.12"
 pillow = "^10.2.0"
+nodejs-bin = {extras = ["cmd"], version = "^18.4.0a4"}
 
 
 [tool.poetry.group.dev.dependencies]
