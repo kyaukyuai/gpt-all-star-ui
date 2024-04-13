@@ -56,8 +56,15 @@ def st_sidebar():
             st.session_state["project_name"] = selected_project
 
         step_options = [ExtendedStepType.DEFAULT.display_name]
-        if selected_project != "New Project":
-            step_options.append(ExtendedStepType.NONE.display_name)
+        (
+            step_options.extend(
+                [
+                    ExtendedStepType.NONE.display_name,
+                ]
+            )
+            if selected_project != "New Project"
+            else None
+        )
         st.session_state["step_type"] = st.selectbox(_("Building Type"), step_options)
 
         st.divider()

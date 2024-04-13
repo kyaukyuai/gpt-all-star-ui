@@ -20,6 +20,7 @@ class ExtendedStepType(Enum):
     HEALING = StepType.HEALING
     NOT_STARTED = "not_started"
     EXECUTION = "execution"
+    DEPLOYMENT = "deployment"
     FINISHED = "finished"
 
     @property
@@ -41,6 +42,7 @@ class ExtendedStepType(Enum):
             ExtendedStepType.HEALING: _("Healing"),
             ExtendedStepType.NOT_STARTED: _("Not Started"),
             ExtendedStepType.EXECUTION: _("Execution"),
+            ExtendedStepType.DEPLOYMENT: _("Version Management"),
             ExtendedStepType.FINISHED: _("Finished"),
         }[self]
 
@@ -58,6 +60,8 @@ def get_steps(step_type: str):
             ExtendedStepType.ENTRYPOINT,
             ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.EXECUTION,
+            ExtendedStepType.DEPLOYMENT,
+            ExtendedStepType.FINISHED,
         ]
     elif step_type == ExtendedStepType.BUILD.display_name:
         return [
@@ -65,10 +69,18 @@ def get_steps(step_type: str):
             ExtendedStepType.ENTRYPOINT,
             ExtendedStepType.QUALITY_ASSURANCE,
             ExtendedStepType.EXECUTION,
+            ExtendedStepType.DEPLOYMENT,
+            ExtendedStepType.FINISHED,
+        ]
+    elif step_type == ExtendedStepType.DEPLOYMENT.display_name:
+        return [
+            ExtendedStepType.DEPLOYMENT,
+            ExtendedStepType.FINISHED,
         ]
     elif step_type == ExtendedStepType.NONE.display_name:
         return [
             ExtendedStepType.EXECUTION,
+            ExtendedStepType.FINISHED,
         ]
     else:
         raise ValueError(f"Invalid step type: {step_type}")

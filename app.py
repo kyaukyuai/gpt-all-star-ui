@@ -16,6 +16,8 @@ os.environ["LANGCHAIN_ENDPOINT"] = st.secrets["LANGCHAIN_ENDPOINT"]
 os.environ["LANGCHAIN_API_KEY"] = st.secrets["LANGCHAIN_API_KEY"]
 os.environ["LANGCHAIN_PROJECT"] = st.secrets["LANGCHAIN_PROJECT"]
 os.environ["BROWSER"] = st.secrets["BROWSER"]
+os.environ["GITHUB_ORG"] = st.secrets["GITHUB_ORG"]
+os.environ["GITHUB_TOKEN"] = st.secrets["GITHUB_TOKEN"]
 
 st_init()
 init_session_states()
