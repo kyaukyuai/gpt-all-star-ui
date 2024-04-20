@@ -6,6 +6,7 @@ from st_components.st_models.extended_step_type import ExtendedStepType
 
 OPEN_AI = "OpenAI"
 AZURE_OPEN_AI = "Azure OpenAI"
+ANTHROPIC = "Anthropic"
 
 
 def get_project_dirs():
@@ -71,13 +72,15 @@ def st_sidebar():
 
         api_server = st.selectbox(
             _("API Server"),
-            [OPEN_AI, AZURE_OPEN_AI],
+            [OPEN_AI, AZURE_OPEN_AI, ANTHROPIC],
         )
 
         if api_server == OPEN_AI:
             set_open_ai_credentials()
         elif api_server == AZURE_OPEN_AI:
             set_azure_open_ai_credentials()
+        elif api_server == ANTHROPIC:
+            set_anthropic_credentials()
 
 
 def set_open_ai_credentials():
@@ -143,3 +146,34 @@ def update_azure_open_ai_environment(azure_openai_key, azure_endpoint, deploymen
     os.environ["AZURE_OPENAI_API_KEY"] = azure_openai_key
     os.environ["AZURE_OPENAI_ENDPOINT"] = azure_endpoint
     os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"] = deployment_id
+
+
+def set_anthropic_credentials():
+    _ = st.session_state.translator
+    expander = st.expander(
+        label=_("Settings"), expanded=(not st.session_state.get("chat_ready", False))
+    )
+    with expander:
+        anthropic_api_key = st.text_input(
+            "Anthropic API Key:",
+            type="password",
+            value=st.secrets.get("ANTHROPIC_API_KEY"),
+        )
+        model_options = list(
+            st.session_state.get("models", {}).get("anthropic", {}).keys()
+        )
+        model = st.selectbox(label=_("🔌 models"), options=model_options, index=0)
+
+        if (
+            st.button(_("Save"), key="anthropic_save_model_configs")
+            and anthropic_api_key
+        ):
+            update_anthropic_environment(anthropic_api_key, model)
+            st.session_state["chat_ready"] = True
+            st.rerun()
+
+
+def update_anthropic_environment(anthropic_api_key, model):
+    os.environ["ENDPOINT"] = "ANTHROPIC"
+    os.environ["ANTHROPIC_API_KEY"] = anthropic_api_key
+    os.environ["ANTHROPIC_API_MODEL_NAME"] = model
