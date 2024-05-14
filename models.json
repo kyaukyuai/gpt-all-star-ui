@@ -1,5 +1,6 @@
 {
   "openai": {
+    "gpt-4o": {},
     "gpt-4": {},
     "gpt-4-32k": {},
     "gpt-4-turbo": {},
