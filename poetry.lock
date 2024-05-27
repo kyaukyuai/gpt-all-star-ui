@@ -1116,12 +1116,12 @@ test = ["coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre-commit",
 
 [[package]]
 name = "gpt-all-star"
-version = "0.0.40"
+version = "0.0.41"
 description = "AI-powered code generation tool for scratch development of web applications with a team collaboration of autonomous AI agents. This is a research-project, and its primary value is to explore the possibility of autonomous AI agents."
 optional = false
 python-versions = "<3.11,>=3.10.0"
 files = [
-    {file = "gpt_all_star-0.0.40.tar.gz", hash = "sha256:cc1725453f1532897ca1b40f89f8c6372dab1011ff8b1fd2c51328a5592fff5d"},
+    {file = "gpt_all_star-0.0.41.tar.gz", hash = "sha256:e4e5254a576d41460e5f27a7377b1beec403c7b2b830a8a82ebc3061b429a0ee"},
 ]
 
 [package.dependencies]
@@ -1132,7 +1132,7 @@ langchain = ">=0.2.0,<0.3.0"
 langchain-anthropic = ">=0.1.4,<0.2.0"
 langchain-experimental = ">=0.0.59,<0.0.60"
 langchain-openai = ">=0.1.0,<0.2.0"
-langgraph = ">=0.0.50,<0.0.51"
+langgraph = ">=0.0.55,<0.0.56"
 llama-index = ">=0.10.0,<0.11.0"
 openai = ">=1.6.1,<2.0.0"
 prompt-toolkit = ">=3.0.43,<4.0.0"
@@ -1754,17 +1754,17 @@ extended-testing = ["beautifulsoup4 (>=4.12.3,<5.0.0)", "lxml (>=4.9.3,<6.0)"]
 
 [[package]]
 name = "langgraph"
-version = "0.0.50"
+version = "0.0.55"
 description = "langgraph"
 optional = false
 python-versions = "<4.0,>=3.9.0"
 files = [
-    {file = "langgraph-0.0.50-py3-none-any.whl", hash = "sha256:a65c929118f026e5548aba36b6828cec630e7b20fd6fa9b6482a78aa86f53d74"},
-    {file = "langgraph-0.0.50.tar.gz", hash = "sha256:9cee33b1bdf107fb77b9d6fd7bb8d8d770273472f328bf1314bf32f401e37a64"},
+    {file = "langgraph-0.0.55-py3-none-any.whl", hash = "sha256:98abfaea107af79cfe3e9eb3768542fcff6c78561d79f3a532099bd17c0b9be2"},
+    {file = "langgraph-0.0.55.tar.gz", hash = "sha256:beb74bff8429b98d5840882a615913a3df4a6986825b96cf3b6453c9aab013b1"},
 ]
 
 [package.dependencies]
-langchain-core = ">=0.1.52,<0.3"
+langchain-core = ">=0.2,<0.3"
 uuid6 = ">=2024.1.12,<2025.0.0"
 
 [[package]]
@@ -5339,4 +5339,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "a853125265587a6b8bc3f15af74424d0f4a02ab4bbaeda7b8344d30b032070e2"
+content-hash = "e2e99e75dfa3d5efa3a5e44316310a2178152047873b7d6c54cf3dd09f9b13fa"
