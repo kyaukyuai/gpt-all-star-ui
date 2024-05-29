@@ -4176,13 +4176,13 @@ streamlit = ">=1.2"
 
 [[package]]
 name = "streamlit-option-menu"
-version = "0.3.12"
+version = "0.3.13"
 description = "streamlit-option-menu is a simple Streamlit component that allows users to select a single item from a list of options in a menu."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "streamlit-option-menu-0.3.12.tar.gz", hash = "sha256:a954241cf188691f17072cf3ceb59e97f106f7492ddb5b79c4d42906758a5af2"},
-    {file = "streamlit_option_menu-0.3.12-py3-none-any.whl", hash = "sha256:f83045da205f83464e6606a80facfec2cde49fe750e1148eb275c88ddcca35b9"},
+    {file = "streamlit-option-menu-0.3.13.tar.gz", hash = "sha256:a0fb4eb52bdc5060b0cbf08ef75fc27c78126e13cdcdde1ec7beea36c0cc3880"},
+    {file = "streamlit_option_menu-0.3.13-py3-none-any.whl", hash = "sha256:7e7e4f8770bc444ea4e51b27d3f6dfbda87e369b686421137f323d5b9ad13c25"},
 ]
 
 [package.dependencies]
