@@ -1118,12 +1118,12 @@ test = ["coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre-commit",
 
 [[package]]
 name = "gpt-all-star"
-version = "0.0.42"
+version = "0.0.44"
 description = "AI-powered code generation tool for scratch development of web applications with a team collaboration of autonomous AI agents. This is a research-project, and its primary value is to explore the possibility of autonomous AI agents."
 optional = false
 python-versions = "<3.11,>=3.10.0"
 files = [
-    {file = "gpt_all_star-0.0.42.tar.gz", hash = "sha256:94454601ab307eb5b351fb4e9d5c3d44fab6e8ff0319296256d1c9e06ac6ba10"},
+    {file = "gpt_all_star-0.0.44.tar.gz", hash = "sha256:87983f350c9f76ea721b25e0b87e8fc55b3a21d192efb6ba43ef9b40b5baf8b0"},
 ]
 
 [package.dependencies]
@@ -1132,9 +1132,9 @@ gitpython = ">=3.1.41,<4.0.0"
 jinja2 = ">=3.1.2,<4.0.0"
 langchain = ">=0.2.0,<0.3.0"
 langchain-anthropic = ">=0.1.4,<0.2.0"
-langchain-experimental = ">=0.0.59,<0.0.60"
+langchain-experimental = ">=0.0.60,<0.0.61"
 langchain-openai = ">=0.1.0,<0.2.0"
-langgraph = ">=0.0.56,<0.0.57"
+langgraph = ">=0.0.66,<0.0.67"
 llama-index = ">=0.10.0,<0.11.0"
 openai = ">=1.6.1,<2.0.0"
 prompt-toolkit = ">=3.0.43,<4.0.0"
@@ -1774,13 +1774,13 @@ extended-testing = ["jinja2 (>=3,<4)"]
 
 [[package]]
 name = "langchain-experimental"
-version = "0.0.59"
+version = "0.0.60"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0,>=3.8.1"
 files = [
-    {file = "langchain_experimental-0.0.59-py3-none-any.whl", hash = "sha256:d6ceb586c15ad35fc619542e86d01f0984a94985324a78a9ed8cd87615ff265d"},
-    {file = "langchain_experimental-0.0.59.tar.gz", hash = "sha256:3a93f5c328f6ee1cd4f9dd8792c535df2d5638cff0d778ee25546804b5282fda"},
+    {file = "langchain_experimental-0.0.60-py3-none-any.whl", hash = "sha256:ef3b6b6b84fe2bfe19eba6d1a98005e27d96576514c6415f5afe4ace5bf477d8"},
+    {file = "langchain_experimental-0.0.60.tar.gz", hash = "sha256:a16cbcd18cda6b86be8f41fed7963c13569295def0d8b4c6324b806d878d442c"},
 ]
 
 [package.dependencies]
@@ -1825,18 +1825,17 @@ extended-testing = ["beautifulsoup4 (>=4.12.3,<5.0.0)", "lxml (>=4.9.3,<6.0)"]
 
 [[package]]
 name = "langgraph"
-version = "0.0.56"
+version = "0.0.66"
 description = "langgraph"
 optional = false
 python-versions = "<4.0,>=3.9.0"
 files = [
-    {file = "langgraph-0.0.56-py3-none-any.whl", hash = "sha256:c9e1eba2848083b97ff53fbd936fb1bc804fd9205b4b8e5f83588b987c97a35b"},
-    {file = "langgraph-0.0.56.tar.gz", hash = "sha256:ba4c2eae3d35aa639bbb38b90da11350b627d4f4020730873632ebf56735b0ab"},
+    {file = "langgraph-0.0.66-py3-none-any.whl", hash = "sha256:4a6676afadc74fb9c85b318dbcb2cc17f528136b7a6edc3febd170651b2d7a56"},
+    {file = "langgraph-0.0.66.tar.gz", hash = "sha256:34dcb4f83f7072ee6ed2ec5c41e9db065c55477ea7f6e3d3e0fbc9a8c67ef6fe"},
 ]
 
 [package.dependencies]
 langchain-core = ">=0.2,<0.3"
-uuid6 = ">=2024.1.12,<2025.0.0"
 
 [[package]]
 name = "langsmith"
@@ -2221,9 +2220,13 @@ files = [
     {file = "lxml-5.2.2-cp36-cp36m-win_amd64.whl", hash = "sha256:edcfa83e03370032a489430215c1e7783128808fd3e2e0a3225deee278585196"},
     {file = "lxml-5.2.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:28bf95177400066596cdbcfc933312493799382879da504633d16cf60bba735b"},
     {file = "lxml-5.2.2-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:3a745cc98d504d5bd2c19b10c79c61c7c3df9222629f1b6210c0368177589fb8"},
+    {file = "lxml-5.2.2-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1b590b39ef90c6b22ec0be925b211298e810b4856909c8ca60d27ffbca6c12e6"},
     {file = "lxml-5.2.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b336b0416828022bfd5a2e3083e7f5ba54b96242159f83c7e3eebaec752f1716"},
+    {file = "lxml-5.2.2-cp37-cp37m-manylinux_2_28_aarch64.whl", hash = "sha256:c2faf60c583af0d135e853c86ac2735ce178f0e338a3c7f9ae8f622fd2eb788c"},
     {file = "lxml-5.2.2-cp37-cp37m-manylinux_2_28_x86_64.whl", hash = "sha256:4bc6cb140a7a0ad1f7bc37e018d0ed690b7b6520ade518285dc3171f7a117905"},
+    {file = "lxml-5.2.2-cp37-cp37m-musllinux_1_1_aarch64.whl", hash = "sha256:7ff762670cada8e05b32bf1e4dc50b140790909caa8303cfddc4d702b71ea184"},
     {file = "lxml-5.2.2-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:57f0a0bbc9868e10ebe874e9f129d2917750adf008fe7b9c1598c0fbbfdde6a6"},
+    {file = "lxml-5.2.2-cp37-cp37m-musllinux_1_2_aarch64.whl", hash = "sha256:a6d2092797b388342c1bc932077ad232f914351932353e2e8706851c870bca1f"},
     {file = "lxml-5.2.2-cp37-cp37m-musllinux_1_2_x86_64.whl", hash = "sha256:60499fe961b21264e17a471ec296dcbf4365fbea611bf9e303ab69db7159ce61"},
     {file = "lxml-5.2.2-cp37-cp37m-win32.whl", hash = "sha256:d9b342c76003c6b9336a80efcc766748a333573abf9350f4094ee46b006ec18f"},
     {file = "lxml-5.2.2-cp37-cp37m-win_amd64.whl", hash = "sha256:b16db2770517b8799c79aa80f4053cd6f8b716f21f8aca962725a9565ce3ee40"},
@@ -2890,6 +2893,7 @@ optional = false
 python-versions = ">=3.9"
 files = [
     {file = "pandas-2.2.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:90c6fca2acf139569e74e8781709dccb6fe25940488755716d1d354d6bc58bce"},
+    {file = "pandas-2.2.2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:c7adfc142dac335d8c1e0dcbd37eb8617eac386596eb9e1a1b77791cf2498238"},
     {file = "pandas-2.2.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4abfe0be0d7221be4f12552995e58723c7422c80a659da13ca382697de830c08"},
     {file = "pandas-2.2.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8635c16bf3d99040fdf3ca3db669a7250ddf49c55dc4aa8fe0ae0fa8d6dcc1f0"},
     {file = "pandas-2.2.2-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:40ae1dffb3967a52203105a077415a86044a2bea011b5f321c6aa64b379a3f51"},
@@ -2910,6 +2914,7 @@ files = [
     {file = "pandas-2.2.2-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:43498c0bdb43d55cb162cdc8c06fac328ccb5d2eabe3cadeb3529ae6f0517c32"},
     {file = "pandas-2.2.2-cp312-cp312-win_amd64.whl", hash = "sha256:d187d355ecec3629624fccb01d104da7d7f391db0311145817525281e2804d23"},
     {file = "pandas-2.2.2-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:0ca6377b8fca51815f382bd0b697a0814c8bda55115678cbc94c30aacbb6eff2"},
+    {file = "pandas-2.2.2-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:9057e6aa78a584bc93a13f0a9bf7e753a5e9770a30b4d758b8d5f2a62a9433cd"},
     {file = "pandas-2.2.2-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:001910ad31abc7bf06f49dcc903755d2f7f3a9186c0c040b827e522e9cef0863"},
     {file = "pandas-2.2.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:66b479b0bd07204e37583c191535505410daa8df638fd8e75ae1b383851fe921"},
     {file = "pandas-2.2.2-cp39-cp39-musllinux_1_1_aarch64.whl", hash = "sha256:a77e9d1c386196879aa5eb712e77461aaee433e54c68cf253053a73b7e49c33a"},
@@ -3571,6 +3576,7 @@ files = [
     {file = "PyYAML-6.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:bf07ee2fef7014951eeb99f56f39c9bb4af143d8aa3c21b1677805985307da34"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:855fb52b0dc35af121542a76b9a84f8d1cd886ea97c84703eaa6d88e37a2ad28"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:40df9b996c2b73138957fe23a16a4f0ba614f4c0efce1e9406a184b6d07fa3a9"},
+    {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a08c6f0fe150303c1c6b71ebcd7213c2858041a7e01975da3a99aed1e7a378ef"},
     {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c22bec3fbe2524cde73d7ada88f6566758a8f7227bfbf93a408a9d86bcc12a0"},
     {file = "PyYAML-6.0.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:8d4e9c88387b0f5c7d5f281e55304de64cf7f9c0021a3525bd3b1c542da3b0e4"},
     {file = "PyYAML-6.0.1-cp312-cp312-win32.whl", hash = "sha256:d483d2cdf104e7c9fa60c544d92981f12ad66a457afae824d146093b8c294c54"},
@@ -4846,17 +4852,6 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
-name = "uuid6"
-version = "2024.1.12"
-description = "New time-based UUID formats which are suited for use as a database key"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "uuid6-2024.1.12-py3-none-any.whl", hash = "sha256:8150093c8d05a331bc0535bc5ef6cf57ac6eceb2404fd319bc10caee2e02c065"},
-    {file = "uuid6-2024.1.12.tar.gz", hash = "sha256:ed0afb3a973057575f9883201baefe402787ca5e11e1d24e377190f0c43f1993"},
-]
-
-[[package]]
 name = "uvicorn"
 version = "0.30.0"
 description = "The lightning-fast ASGI server."
@@ -5379,4 +5374,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "ce65154d05ba24210d7b07414a34eb318e6f8eb209d89866c62193ad0ec9e674"
+content-hash = "19545fffeb1ebac6e34c5366f7541733405ac4a37b5a1fa1b82290b51987645e"
