@@ -4429,17 +4429,17 @@ streamlit = ">=1.2"
 
 [[package]]
 name = "streamlit-option-menu"
-version = "0.3.13"
+version = "0.4.0"
 description = "streamlit-option-menu is a simple Streamlit component that allows users to select a single item from a list of options in a menu."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "streamlit-option-menu-0.3.13.tar.gz", hash = "sha256:a0fb4eb52bdc5060b0cbf08ef75fc27c78126e13cdcdde1ec7beea36c0cc3880"},
-    {file = "streamlit_option_menu-0.3.13-py3-none-any.whl", hash = "sha256:7e7e4f8770bc444ea4e51b27d3f6dfbda87e369b686421137f323d5b9ad13c25"},
+    {file = "streamlit-option-menu-0.4.0.tar.gz", hash = "sha256:48ec69d59e547fa2fa4bfae001620df8af56a80de2f765ddbb9fcbfb84017129"},
+    {file = "streamlit_option_menu-0.4.0-py3-none-any.whl", hash = "sha256:a55fc7554047b6db371595af2182e435b8a2c715ee6124e8543685bd4670b07e"},
 ]
 
 [package.dependencies]
-streamlit = ">=0.63"
+streamlit = ">=1.36"
 
 [[package]]
 name = "streamlit-toggle-switch"
@@ -5290,4 +5290,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "ff92153e822fded16a62e9a2344e6e0562714f7673c86653a0d1efbc22174cb3"
+content-hash = "b779880b5c5cb747575411965ec0cda3b07fc5dd8126bd85e0a4b35128f410d9"
