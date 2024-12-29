@@ -4417,13 +4417,13 @@ streamlit = ">=0.63"
 
 [[package]]
 name = "streamlit-extras"
-version = "0.4.7"
+version = "0.5.0"
 description = "A library to discover, try, install and share Streamlit extras"
 optional = false
 python-versions = "!=2.7.*,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,!=3.7.*,>=3.8"
 files = [
-    {file = "streamlit_extras-0.4.7-py3-none-any.whl", hash = "sha256:ee8e04d9dcdaf89d9865f3a6cbba8f7dbbce0cd8c9e5c0610d84a0bd04fc4212"},
-    {file = "streamlit_extras-0.4.7.tar.gz", hash = "sha256:c9e4ef1b6dded159ca79f0d87890b5df6fa53cb4caa781cc4bf1250830051a90"},
+    {file = "streamlit_extras-0.5.0-py3-none-any.whl", hash = "sha256:84c24088901331db2adbda1ae2787a65ab094a78632af841678aa0f0d58cddfe"},
+    {file = "streamlit_extras-0.5.0.tar.gz", hash = "sha256:031c109c5057d232413249f97f856f64dd63ae6ec160fe39a4107f63d8934433"},
 ]
 
 [package.dependencies]
@@ -5215,4 +5215,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.13"
-content-hash = "153a16599c95a0303fb9e0bcf00e579c7535b835ea8871fe46e4c7dec689a84c"
+content-hash = "592759192485b14e0b2d444d3c42b1b03b0fd3657daf26fa03035c4b7c15ffeb"
