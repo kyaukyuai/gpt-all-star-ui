@@ -6,6 +6,6 @@ flake8-check:
 pre-commit-run:
 	poetry run pre-commit run --all-files
 
-code-check: flake8-check pre-commit-run
+check: flake8-check pre-commit-run
 
 .PHONY: code-check
